@@ -23,6 +23,7 @@
 		096A0B59240EE10F008278D2 /* WeatherModelAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096A0B58240EE10F008278D2 /* WeatherModelAPI.swift */; };
 		096A0B5C240EE12F008278D2 /* WeatherCurrentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096A0B5B240EE12F008278D2 /* WeatherCurrentModel.swift */; };
 		096A0B5E240EE137008278D2 /* WeatherHourlyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096A0B5D240EE137008278D2 /* WeatherHourlyModel.swift */; };
+		096A0B60240EE5EB008278D2 /* SecretKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096A0B5F240EE5EB008278D2 /* SecretKeys.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		096A0B58240EE10F008278D2 /* WeatherModelAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModelAPI.swift; sourceTree = "<group>"; };
 		096A0B5B240EE12F008278D2 /* WeatherCurrentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCurrentModel.swift; sourceTree = "<group>"; };
 		096A0B5D240EE137008278D2 /* WeatherHourlyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherHourlyModel.swift; sourceTree = "<group>"; };
+		096A0B5F240EE5EB008278D2 /* SecretKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretKeys.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 				096A0B5A240EE11C008278D2 /* Models */,
 				096A0B42240EDFB5008278D2 /* Controllers */,
 				096A0B49240EE02D008278D2 /* Views */,
+				096A0B61240EE5F4008278D2 /* SecretKeys */,
 				096A0B37240EDF50008278D2 /* Assets.xcassets */,
 				096A0B39240EDF50008278D2 /* LaunchScreen.storyboard */,
 				096A0B3C240EDF50008278D2 /* Info.plist */,
@@ -127,6 +130,14 @@
 				096A0B5D240EE137008278D2 /* WeatherHourlyModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		096A0B61240EE5F4008278D2 /* SecretKeys */ = {
+			isa = PBXGroup;
+			children = (
+				096A0B5F240EE5EB008278D2 /* SecretKeys.swift */,
+			);
+			path = SecretKeys;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -213,6 +224,7 @@
 				096A0B2F240EDF4D008278D2 /* AppDelegate.swift in Sources */,
 				096A0B5C240EE12F008278D2 /* WeatherCurrentModel.swift in Sources */,
 				096A0B31240EDF4D008278D2 /* SceneDelegate.swift in Sources */,
+				096A0B60240EE5EB008278D2 /* SecretKeys.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
