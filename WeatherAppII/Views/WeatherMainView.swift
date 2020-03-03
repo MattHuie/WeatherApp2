@@ -8,9 +8,22 @@ class WeatherMainView: UIView {
         label.backgroundColor = .white
         return label
     }()
+    lazy var humidityText: UILabel = {
+        let label = UILabel()
+        label.text = "Humidity"
+        label.backgroundColor = .white
+        return label
+    }()
     lazy var humidityLabel: UILabel = {
         let label = UILabel()
         label.text = "Humidity Label"
+        label.backgroundColor = .white
+        return label
+    }()
+    
+    lazy var windDirectionLabel: UILabel = {
+        let label = UILabel()
+        label.text = "WindDirection Label"
         label.backgroundColor = .white
         return label
     }()
@@ -20,9 +33,23 @@ class WeatherMainView: UIView {
         label.backgroundColor = .white
         return label
     }()
+    
+    lazy var feelsLikeText: UILabel = {
+        let label = UILabel()
+        label.text = "Feels like"
+        label.backgroundColor = .white
+        return label
+    }()
     lazy var feelsLikeLabel: UILabel = {
         let label = UILabel()
         label.text = "FeelsLike Label"
+        label.backgroundColor = .white
+        return label
+    }()
+    
+    lazy var visibilityText: UILabel = {
+        let label = UILabel()
+        label.text = "Visibility"
         label.backgroundColor = .white
         return label
     }()
@@ -32,21 +59,29 @@ class WeatherMainView: UIView {
         label.backgroundColor = .white
         return label
     }()
+    
     lazy var weatherLabel: UILabel = {
         let label = UILabel()
         label.text = "Weather Label"
         label.backgroundColor = .white
         return label
     }()
-    lazy var windDirectionLabel: UILabel = {
+    lazy var sunriseText: UILabel = {
         let label = UILabel()
-        label.text = "WindDirection Label"
+        label.text = "Sunrise"
         label.backgroundColor = .white
         return label
     }()
     lazy var sunriseLabel: UILabel = {
         let label = UILabel()
         label.text = "Sunrise Label"
+        label.backgroundColor = .white
+        return label
+    }()
+    
+    lazy var sunsetText: UILabel = {
+        let label = UILabel()
+        label.text = "Sunset"
         label.backgroundColor = .white
         return label
     }()
@@ -65,12 +100,11 @@ class WeatherMainView: UIView {
         super.init(frame: UIScreen.main.bounds)
         self.backgroundColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
         setupTemperature()
-        setupHumidity()
-        setupWindSpeed()
-        setupFeelsLike()
-        setupVisibility()
         setupWeather()
+        setupFeelsLike()
+        setupHumidity()
         setupWindDirection()
+        setupVisibility()
         setupSunrise()
         setupSunset()
     }
@@ -83,71 +117,89 @@ class WeatherMainView: UIView {
         addSubview(temperatureLabel)
         temperatureLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            temperatureLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 20),
-            temperatureLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 20)
-        ])
-    }
-    func setupHumidity() {
-        addSubview(humidityLabel)
-        humidityLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            humidityLabel.topAnchor.constraint(equalTo: temperatureLabel.bottomAnchor, constant: 10),
-            humidityLabel.leadingAnchor.constraint(equalTo: temperatureLabel.leadingAnchor, constant: 0)
-        ])
-    }
-    func setupWindSpeed() {
-        addSubview(windSpeedLabel)
-        windSpeedLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            windSpeedLabel.topAnchor.constraint(equalTo: humidityLabel.bottomAnchor, constant: 10),
-            windSpeedLabel.leadingAnchor.constraint(equalTo: humidityLabel.leadingAnchor, constant: 0)
-        ])
-    }
-    func setupFeelsLike() {
-        addSubview(feelsLikeLabel)
-        feelsLikeLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            feelsLikeLabel.topAnchor.constraint(equalTo: windSpeedLabel.bottomAnchor, constant: 10),
-            feelsLikeLabel.leadingAnchor.constraint(equalTo: windSpeedLabel.leadingAnchor, constant: 0)
-        ])
-    }
-    func setupVisibility() {
-        addSubview(visibilityLabel)
-        visibilityLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            visibilityLabel.topAnchor.constraint(equalTo: feelsLikeLabel.bottomAnchor, constant: 10),
-            visibilityLabel.leadingAnchor.constraint(equalTo: feelsLikeLabel.leadingAnchor, constant: 0)
+            temperatureLabel.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor, constant: 0),
+            temperatureLabel.centerYAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerYAnchor, constant: -250),
+            temperatureLabel.heightAnchor.constraint(equalToConstant: 150),
+            temperatureLabel.widthAnchor.constraint(equalToConstant: 150)
         ])
     }
     func setupWeather() {
         addSubview(weatherLabel)
         weatherLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            weatherLabel.topAnchor.constraint(equalTo: visibilityLabel.bottomAnchor, constant: 10),
-            weatherLabel.leadingAnchor.constraint(equalTo: visibilityLabel.leadingAnchor, constant: 0)
+            weatherLabel.topAnchor.constraint(equalTo: temperatureLabel.bottomAnchor, constant: 10),
+            weatherLabel.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor, constant: 0)
+        ])
+    }
+    func setupFeelsLike() {
+        addSubview(feelsLikeText)
+        addSubview(feelsLikeLabel)
+        feelsLikeText.translatesAutoresizingMaskIntoConstraints = false
+        feelsLikeLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            feelsLikeText.topAnchor.constraint(equalTo: weatherLabel.bottomAnchor, constant: 20),
+            feelsLikeText.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            feelsLikeLabel.topAnchor.constraint(equalTo: feelsLikeText.bottomAnchor, constant: 10),
+            feelsLikeLabel.leadingAnchor.constraint(equalTo: feelsLikeText.leadingAnchor, constant: 5)
+        ])
+    }
+    func setupHumidity() {
+        addSubview(humidityText)
+        addSubview(humidityLabel)
+        humidityText.translatesAutoresizingMaskIntoConstraints = false
+        humidityLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            humidityText.topAnchor.constraint(equalTo: feelsLikeLabel.bottomAnchor, constant: 20),
+            humidityText.leadingAnchor.constraint(equalTo: feelsLikeText.leadingAnchor, constant: 0),
+            humidityLabel.topAnchor.constraint(equalTo: humidityText.bottomAnchor, constant: 10),
+            humidityLabel.leadingAnchor.constraint(equalTo: feelsLikeLabel.leadingAnchor, constant: 0)
         ])
     }
     func setupWindDirection() {
         addSubview(windDirectionLabel)
+        addSubview(windSpeedLabel)
         windDirectionLabel.translatesAutoresizingMaskIntoConstraints = false
+        windSpeedLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            windDirectionLabel.topAnchor.constraint(equalTo: weatherLabel.bottomAnchor, constant: 10),
-            windDirectionLabel.leadingAnchor.constraint(equalTo: weatherLabel.leadingAnchor, constant: 0)
+            windDirectionLabel.topAnchor.constraint(equalTo: humidityLabel.bottomAnchor, constant: 20),
+            windDirectionLabel.leadingAnchor.constraint(equalTo: humidityText.leadingAnchor, constant: 0),
+            windSpeedLabel.topAnchor.constraint(equalTo: windDirectionLabel.bottomAnchor, constant: 10),
+            windSpeedLabel.leadingAnchor.constraint(equalTo: humidityLabel.leadingAnchor, constant: 0)
+        ])
+    }
+    func setupVisibility() {
+        addSubview(visibilityText)
+        addSubview(visibilityLabel)
+        visibilityText.translatesAutoresizingMaskIntoConstraints = false
+        visibilityLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            visibilityText.topAnchor.constraint(equalTo: weatherLabel.bottomAnchor, constant: 20),
+            visibilityText.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor, constant: 50),
+            visibilityLabel.topAnchor.constraint(equalTo: visibilityText.bottomAnchor, constant: 10),
+            visibilityLabel.leadingAnchor.constraint(equalTo: visibilityText.leadingAnchor, constant: 5)
         ])
     }
     func setupSunrise() {
+        addSubview(sunriseText)
         addSubview(sunriseLabel)
+        sunriseText.translatesAutoresizingMaskIntoConstraints = false
         sunriseLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            sunriseLabel.topAnchor.constraint(equalTo: windDirectionLabel.bottomAnchor, constant: 10),
-            sunriseLabel.leadingAnchor.constraint(equalTo: windDirectionLabel.leadingAnchor, constant: 0)
+            sunriseText.topAnchor.constraint(equalTo: visibilityLabel.bottomAnchor, constant: 20),
+            sunriseText.leadingAnchor.constraint(equalTo: visibilityText.leadingAnchor, constant: 0),
+            sunriseLabel.topAnchor.constraint(equalTo: sunriseText.bottomAnchor, constant: 10),
+            sunriseLabel.leadingAnchor.constraint(equalTo: visibilityLabel.leadingAnchor, constant: 0)
         ])
     }
     func setupSunset() {
+        addSubview(sunsetText)
         addSubview(sunsetLabel)
+        sunsetText.translatesAutoresizingMaskIntoConstraints = false
         sunsetLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            sunsetLabel.topAnchor.constraint(equalTo: sunriseLabel.bottomAnchor, constant: 10),
+            sunsetText.topAnchor.constraint(equalTo: sunriseLabel.bottomAnchor, constant: 20),
+            sunsetText.leadingAnchor.constraint(equalTo: sunriseText.leadingAnchor, constant: 0),
+            sunsetLabel.topAnchor.constraint(equalTo: sunsetText.bottomAnchor, constant: 10),
             sunsetLabel.leadingAnchor.constraint(equalTo: sunriseLabel.leadingAnchor, constant: 0)
         ])
     }
@@ -159,4 +211,5 @@ class WeatherMainView: UIView {
         ])
     }
 }
+
 
