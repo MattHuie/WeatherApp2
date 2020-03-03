@@ -1,21 +1,26 @@
-//
-//  LocationListView.swift
-//  WeatherAppII
-//
-//  Created by Matthew Huie on 3/3/20.
-//  Copyright © 2020 Matthew Huie. All rights reserved.
-//
-
 import UIKit
 
 class LocationListView: UIView {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    
+    
+    
+    override init(frame: CGRect) {
+        super.init(frame: UIScreen.main.bounds)
+        commonInit()
+        
     }
-    */
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func commonInit() {
+        self.backgroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
+    }
+}
 
+extension LocationListView {
+    private func setupView() {
+        
+    }
 }
