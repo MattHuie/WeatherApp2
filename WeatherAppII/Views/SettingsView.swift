@@ -24,7 +24,7 @@ class SettingsView: UIView {
     }
     
     private func commonInit() {
-        backgroundColor = #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)
+        backgroundColor = .black
         setupView()
     }
     
@@ -39,7 +39,9 @@ extension SettingsView {
         addSubview(segmentedControlTemp)
         segmentedControlTemp.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            
+            segmentedControlTemp.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 50),
+            segmentedControlTemp.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+            segmentedControlTemp.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor)
         ])
     }
     

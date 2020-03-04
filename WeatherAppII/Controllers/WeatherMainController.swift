@@ -34,6 +34,12 @@ class WeatherMainController: UIViewController {
             }
         }
         WeatherAPIClient.weatherCurrentAPI(zipcode: "") { (error, data) in
+
+            if let data = data {
+                       self.weatherCurrent = data
+                   }else if let error = error {
+                       print(error)
+                   }
            if let error = error {
             print(error)
                    }else  if let data = data {

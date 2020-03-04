@@ -7,6 +7,8 @@ class LocationListController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(locationView)
+        locationView.locationTable.dataSource = self
+        locationView.locationTable.delegate = self
 
 
     }
@@ -14,4 +16,15 @@ class LocationListController: UIViewController {
 
 
 
+}
+extension LocationListController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        5
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
+    }
+    
+    
 }
