@@ -16,99 +16,99 @@ class WeatherMainScrollView: UIScrollView {
         return label
     }()
     lazy var temperatureLabel: UILabel = {
-           let label = UILabel()
-           label.text = "Temperature Label"
-           label.backgroundColor = .white
-           return label
-       }()
-       lazy var humidityText: UILabel = {
-           let label = UILabel()
-           label.text = "Humidity"
-           label.backgroundColor = .white
-           return label
-       }()
-       lazy var humidityLabel: UILabel = {
-           let label = UILabel()
-           label.text = "Humidity Label"
-           label.backgroundColor = .white
-           return label
-       }()
-       
-       lazy var windDirectionLabel: UILabel = {
-           let label = UILabel()
-           label.text = "WindDirection Label"
-           label.backgroundColor = .white
-           return label
-       }()
-       lazy var windSpeedLabel: UILabel = {
-           let label = UILabel()
-           label.text = "WindSpeed Label"
-           label.backgroundColor = .white
-           return label
-       }()
-       
-       lazy var feelsLikeText: UILabel = {
-           let label = UILabel()
-           label.text = "Feels like"
-           label.backgroundColor = .white
-           return label
-       }()
-       lazy var feelsLikeLabel: UILabel = {
-           let label = UILabel()
-           label.text = "FeelsLike Label"
-           label.backgroundColor = .white
-           return label
-       }()
-       
-       lazy var visibilityText: UILabel = {
-           let label = UILabel()
-           label.text = "Visibility"
-           label.backgroundColor = .white
-           return label
-       }()
-       lazy var visibilityLabel: UILabel = {
-           let label = UILabel()
-           label.text = "Visibility Label"
-           label.backgroundColor = .white
-           return label
-       }()
-       
-       lazy var weatherLabel: UILabel = {
-           let label = UILabel()
-           label.text = "Weather Label"
-           label.backgroundColor = .white
-           return label
-       }()
-       lazy var sunriseText: UILabel = {
-           let label = UILabel()
-           label.text = "Sunrise"
-           label.backgroundColor = .white
-           return label
-       }()
-       lazy var sunriseLabel: UILabel = {
-           let label = UILabel()
-           label.text = "Sunrise Label"
-           label.backgroundColor = .white
-           return label
-       }()
-       
-       lazy var sunsetText: UILabel = {
-           let label = UILabel()
-           label.text = "Sunset"
-           label.backgroundColor = .white
-           return label
-       }()
-       lazy var sunsetLabel: UILabel = {
-           let label = UILabel()
-           label.text = "Sunset Label"
-           label.backgroundColor = .white
-           return label
-       }()
-       lazy var locateButton: UIButton = {
-           let button = UIButton()
-           return button
-       }()
-    
+        let label = UILabel()
+        label.text = "Temperature Label"
+        label.backgroundColor = .white
+        return label
+    }()
+    lazy var humidityText: UILabel = {
+        let label = UILabel()
+        label.text = "Humidity"
+        label.backgroundColor = .white
+        return label
+    }()
+    lazy var humidityLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Humidity Label"
+        label.backgroundColor = .white
+        return label
+    }()
+
+    lazy var windDirectionLabel: UILabel = {
+        let label = UILabel()
+        label.text = "WindDirection Label"
+        label.backgroundColor = .white
+        return label
+    }()
+    lazy var windSpeedLabel: UILabel = {
+        let label = UILabel()
+        label.text = "WindSpeed Label"
+        label.backgroundColor = .white
+        return label
+    }()
+
+    lazy var feelsLikeText: UILabel = {
+        let label = UILabel()
+        label.text = "Feels like"
+        label.backgroundColor = .white
+        return label
+    }()
+    lazy var feelsLikeLabel: UILabel = {
+        let label = UILabel()
+        label.text = "FeelsLike Label"
+        label.backgroundColor = .white
+        return label
+    }()
+
+    lazy var visibilityText: UILabel = {
+        let label = UILabel()
+        label.text = "Visibility"
+        label.backgroundColor = .white
+        return label
+    }()
+    lazy var visibilityLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Visibility Label"
+        label.backgroundColor = .white
+        return label
+    }()
+
+    lazy var weatherLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Weather Label"
+        label.backgroundColor = .white
+        return label
+    }()
+    lazy var sunriseText: UILabel = {
+        let label = UILabel()
+        label.text = "Sunrise"
+        label.backgroundColor = .white
+        return label
+    }()
+    lazy var sunriseLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Sunrise Label"
+        label.backgroundColor = .white
+        return label
+    }()
+
+    lazy var sunsetText: UILabel = {
+        let label = UILabel()
+        label.text = "Sunset"
+        label.backgroundColor = .white
+        return label
+    }()
+    lazy var sunsetLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Sunset Label"
+        label.backgroundColor = .white
+        return label
+    }()
+    lazy var locateButton: UIButton = {
+        let button = UIButton()
+        return button
+    }()
+
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
         self.backgroundColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
@@ -129,16 +129,11 @@ class WeatherMainScrollView: UIScrollView {
         }
 
     func setupCityState() {
-        addSubview(cityLabel)
         addSubview(stateLabel)
-        cityLabel.translatesAutoresizingMaskIntoConstraints = false
         stateLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            cityLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
-            cityLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
-            cityLabel.heightAnchor.constraint(equalToConstant: 40),
-            stateLabel.topAnchor.constraint(equalTo: cityLabel.bottomAnchor, constant: 5),
-            stateLabel.leadingAnchor.constraint(equalTo: cityLabel.leadingAnchor, constant: 5)
+            stateLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 0),
+            stateLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 50)
         ])
     }
     func setupTemperature() {
