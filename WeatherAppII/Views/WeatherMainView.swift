@@ -2,6 +2,22 @@ import UIKit
 
 class WeatherMainView: UIView {
     
+    lazy var mainScrollView: UIScrollView = {
+        let scrollview = UIScrollView()
+        scrollview.translatesAutoresizingMaskIntoConstraints = false
+        scrollview.backgroundColor = .blue
+        scrollview.contentSize = CGSize.init(width: 400, height: 4000)
+        scrollview.isScrollEnabled = true
+        scrollview.isUserInteractionEnabled = true
+        return scrollview
+    }()
+    
+    lazy var mainStackView: UIStackView = {
+        let stackview = UIStackView()
+        stackview.backgroundColor = .black
+        stackview.isUserInteractionEnabled = false
+        return stackview
+    }()
     lazy var cityLabel: UILabel = {
         let label = UILabel()
         label.text = "City"
@@ -112,31 +128,49 @@ class WeatherMainView: UIView {
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
         self.backgroundColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
+        setupMainScrollView()
         setupCityState()
-        setupTemperature()
-        setupWeather()
-        setupFeelsLike()
-        setupHumidity()
-        setupWindDirection()
-        setupVisibility()
-        setupSunrise()
-        setupSunset()
+//        setupTemperature()
+//        setupWeather()
+//        setupFeelsLike()
+//        setupHumidity()
+//        setupWindDirection()
+//        setupVisibility()
+//        setupSunrise()
+//        setupSunset()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    func setupMainScrollView(){
+        addSubview(mainScrollView)
+        mainScrollView.addSubview(mainStackView)
+        mainScrollView.translatesAutoresizingMaskIntoConstraints = false
+        mainStackView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            mainScrollView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
+            mainScrollView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
+            mainScrollView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 0),
+            mainScrollView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: 400),
+            mainStackView.leadingAnchor.constraint(equalTo: mainScrollView.leadingAnchor),
+            mainStackView.trailingAnchor.constraint(equalTo: mainScrollView.trailingAnchor),
+            mainStackView.topAnchor.constraint(equalTo: mainScrollView.topAnchor),
+            mainStackView.bottomAnchor.constraint(equalTo: mainScrollView.bottomAnchor)
+        ])
+    }
     func setupCityState() {
-        addSubview(cityLabel)
-        addSubview(stateLabel)
+        mainStackView.addSubview(cityLabel)
+        mainStackView.addSubview(stateLabel)
         cityLabel.translatesAutoresizingMaskIntoConstraints = false
         stateLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            cityLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 10),
-            cityLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            cityLabel.heightAnchor.constraint(equalToConstant: 50),
+            cityLabel.topAnchor.constraint(equalTo: mainStackView.topAnchor, constant: 10),
+            cityLabel.leadingAnchor.constraint(equalTo: mainStackView.leadingAnchor, constant: 10),
+            cityLabel.heightAnchor.constraint(equalToConstant: 700),
             stateLabel.topAnchor.constraint(equalTo: cityLabel.bottomAnchor, constant: 5),
-            stateLabel.leadingAnchor.constraint(equalTo: cityLabel.leadingAnchor, constant: 5)
+            stateLabel.leadingAnchor.constraint(equalTo: cityLabel.leadingAnchor, constant: 5),
+            stateLabel.heightAnchor.constraint(equalToConstant: 700)
         ])
     }
     func setupTemperature() {
