@@ -7,9 +7,14 @@ class WeatherMainController: UIViewController {
     var weatherForcast = [WeatherStats]()
     var weatherCurrent: WeatherInformation?
     var weatherHourly = [WeatherStatsHourly]()
+    var navagationItem = UINavigationItem.init(title: "")
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Settings", style: .done, target: self, action: #selector(SegueToLocationVC))
+
         view.addSubview(mainView)
         getWeatherInfo()
     }
@@ -38,6 +43,10 @@ class WeatherMainController: UIViewController {
                       }
         }
     
+    }
+    @objc func SegueToLocationVC(_ sender: UIButton!){
+    let viewController = SettingsController()
+    self.navigationController?.pushViewController(viewController, animated: true)
     }
 }
 

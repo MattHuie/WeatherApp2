@@ -24,7 +24,11 @@
 		096A0B5C240EE12F008278D2 /* WeatherCurrentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096A0B5B240EE12F008278D2 /* WeatherCurrentModel.swift */; };
 		096A0B5E240EE137008278D2 /* WeatherHourlyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096A0B5D240EE137008278D2 /* WeatherHourlyModel.swift */; };
 		096A0B60240EE5EB008278D2 /* SecretKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096A0B5F240EE5EB008278D2 /* SecretKeys.swift */; };
+
 		096F3E8A240FFCD900B577E0 /* AlertExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096F3E89240FFCD900B577E0 /* AlertExtentions.swift */; };
+
+		96BCA34924100EE700D95D7E /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96BCA34824100EE700D95D7E /* NavigationController.swift */; };
+
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,7 +51,11 @@
 		096A0B5B240EE12F008278D2 /* WeatherCurrentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCurrentModel.swift; sourceTree = "<group>"; };
 		096A0B5D240EE137008278D2 /* WeatherHourlyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherHourlyModel.swift; sourceTree = "<group>"; };
 		096A0B5F240EE5EB008278D2 /* SecretKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretKeys.swift; sourceTree = "<group>"; };
+
 		096F3E89240FFCD900B577E0 /* AlertExtentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertExtentions.swift; sourceTree = "<group>"; };
+
+		96BCA34824100EE700D95D7E /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
+
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +109,7 @@
 				096A0B32240EDF4D008278D2 /* WeatherMainController.swift */,
 				096A0B43240EDFD0008278D2 /* LocationListController.swift */,
 				096A0B45240EE009008278D2 /* SettingsController.swift */,
+				96BCA34824100EE700D95D7E /* NavigationController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -230,7 +239,11 @@
 				096A0B48240EE029008278D2 /* WeatherMainView.swift in Sources */,
 				096A0B57240EE0FA008278D2 /* WeatherAPIClient.swift in Sources */,
 				096A0B59240EE10F008278D2 /* WeatherModelAPI.swift in Sources */,
+
 				096F3E8A240FFCD900B577E0 /* AlertExtentions.swift in Sources */,
+
+				96BCA34924100EE700D95D7E /* NavigationController.swift in Sources */,
+
 				096A0B33240EDF4D008278D2 /* WeatherMainController.swift in Sources */,
 				096A0B4B240EE042008278D2 /* LocationListView.swift in Sources */,
 				096A0B2F240EDF4D008278D2 /* AppDelegate.swift in Sources */,
