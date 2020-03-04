@@ -10,7 +10,7 @@ struct WeatherInterval: Codable {
 }
 
 struct WeatherStats: Codable {
-    var validTime: Date
+    var validTime: String
     var maxTempC: Int
     var maxTempF: Int
     var minTempC: Int
