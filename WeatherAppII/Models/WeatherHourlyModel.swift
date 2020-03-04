@@ -10,13 +10,13 @@ struct WeatherIntervalHourly: Codable {
 }
 
 struct WeatherStatsHourly: Codable {
-    var dateTimeISO: Date
+    var dateTimeISO: String
     var maxTempC: Int
     var maxTempF: Int
     var minTempC: Int
     var minTempF: Int
-    var TempF: Int
-    var TempC: Int
+    var tempF: Int
+    var tempC: Double
     var humidity: Int
     var feelslikeC: Int
     var feelslikeF: Int
