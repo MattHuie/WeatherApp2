@@ -2,6 +2,19 @@ import UIKit
 
 class WeatherMainView: UIView {
     
+    lazy var cityLabel: UILabel = {
+        let label = UILabel()
+        label.text = "City"
+        label.backgroundColor = .white
+        return label
+    }()
+    lazy var stateLabel: UILabel = {
+        let label = UILabel()
+        label.text = "State"
+        label.backgroundColor = .white
+        return label
+    }()
+    
     lazy var temperatureLabel: UILabel = {
         let label = UILabel()
         label.text = "Temperature Label"
@@ -99,6 +112,7 @@ class WeatherMainView: UIView {
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
         self.backgroundColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
+        setupCityState()
         setupTemperature()
         setupWeather()
         setupFeelsLike()
@@ -112,7 +126,19 @@ class WeatherMainView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+    func setupCityState() {
+        addSubview(cityLabel)
+        addSubview(stateLabel)
+        cityLabel.translatesAutoresizingMaskIntoConstraints = false
+        stateLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            cityLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 10),
+            cityLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            cityLabel.heightAnchor.constraint(equalToConstant: 50),
+            stateLabel.topAnchor.constraint(equalTo: cityLabel.bottomAnchor, constant: 5),
+            stateLabel.leadingAnchor.constraint(equalTo: cityLabel.leadingAnchor, constant: 5)
+        ])
+    }
     func setupTemperature() {
         addSubview(temperatureLabel)
         temperatureLabel.translatesAutoresizingMaskIntoConstraints = false
