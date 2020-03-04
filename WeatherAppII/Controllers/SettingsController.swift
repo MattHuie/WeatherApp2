@@ -19,9 +19,11 @@ class SettingsController: UIViewController {
     func switchTemp() {
         switch settingsView.segmentedControlTemp.selectedSegmentIndex {
         case 0:
-            UserDefaults.standard.set("farenheit", forKey: DefaultKeys.tempType)
+            UserDefaults.standard.set("fahrenheit", forKey: DefaultKeys.tempType)
+            showAlert(title: "Temperature Settings", message: "Temperature has changed to Fahrenheit")
         case 1:
             UserDefaults.standard.set("celcius", forKey: DefaultKeys.tempType)
+            showAlert(title: "Temperature Settings", message: "Temperature has changed to Celcius")
         default: break
         }
     }

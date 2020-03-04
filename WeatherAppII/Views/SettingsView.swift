@@ -6,6 +6,7 @@ class SettingsView: UIView {
         let segment = UISegmentedControl.init(frame: self.bounds)
         segment.insertSegment(withTitle: "Fahrenheit", at: 0, animated: true)
         segment.insertSegment(withTitle: "Celcius", at: 1, animated: true)
+        segment.backgroundColor = .black
         return segment
     }()
     
@@ -24,7 +25,7 @@ class SettingsView: UIView {
     }
     
     private func commonInit() {
-        backgroundColor = .black
+        backgroundColor = .gray
         setupView()
     }
     
