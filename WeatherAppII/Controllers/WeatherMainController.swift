@@ -2,7 +2,7 @@ import UIKit
 
 class WeatherMainController: UIViewController {
 
-    let mainView = WeatherMainView()
+    let mainView = WeatherMainScrollView()
     
     var weatherForcast = [WeatherStats]()
     var weatherCurrent: WeatherInformation?
