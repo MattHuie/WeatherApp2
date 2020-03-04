@@ -130,14 +130,14 @@ class WeatherMainView: UIView {
         self.backgroundColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
         setupMainScrollView()
         setupCityState()
-//        setupTemperature()
-//        setupWeather()
-//        setupFeelsLike()
-//        setupHumidity()
-//        setupWindDirection()
-//        setupVisibility()
-//        setupSunrise()
-//        setupSunset()
+        setupTemperature()
+        setupWeather()
+        setupFeelsLike()
+        setupHumidity()
+        setupWindDirection()
+        setupVisibility()
+        setupSunrise()
+        setupSunset()
     }
     
     required init?(coder: NSCoder) {
@@ -160,13 +160,13 @@ class WeatherMainView: UIView {
         ])
     }
     func setupCityState() {
-        mainStackView.addSubview(cityLabel)
-        mainStackView.addSubview(stateLabel)
+        mainScrollView.addSubview(cityLabel)
+        mainScrollView.addSubview(stateLabel)
         cityLabel.translatesAutoresizingMaskIntoConstraints = false
         stateLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            cityLabel.topAnchor.constraint(equalTo: mainStackView.topAnchor, constant: 10),
-            cityLabel.leadingAnchor.constraint(equalTo: mainStackView.leadingAnchor, constant: 10),
+            cityLabel.topAnchor.constraint(equalTo: mainScrollView.topAnchor, constant: 10),
+            cityLabel.leadingAnchor.constraint(equalTo: mainScrollView.leadingAnchor, constant: 10),
             cityLabel.heightAnchor.constraint(equalToConstant: 700),
             stateLabel.topAnchor.constraint(equalTo: cityLabel.bottomAnchor, constant: 5),
             stateLabel.leadingAnchor.constraint(equalTo: cityLabel.leadingAnchor, constant: 5),
@@ -184,28 +184,28 @@ class WeatherMainView: UIView {
         ])
     }
     func setupWeather() {
-        addSubview(weatherLabel)
+        mainScrollView.addSubview(weatherLabel)
         weatherLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             weatherLabel.topAnchor.constraint(equalTo: temperatureLabel.bottomAnchor, constant: 10),
-            weatherLabel.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor, constant: 0)
+            weatherLabel.centerXAnchor.constraint(equalTo: mainScrollView.centerXAnchor, constant: 0)
         ])
     }
     func setupFeelsLike() {
-        addSubview(feelsLikeText)
-        addSubview(feelsLikeLabel)
+        mainScrollView.addSubview(feelsLikeText)
+        mainScrollView.addSubview(feelsLikeLabel)
         feelsLikeText.translatesAutoresizingMaskIntoConstraints = false
         feelsLikeLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             feelsLikeText.topAnchor.constraint(equalTo: weatherLabel.bottomAnchor, constant: 20),
-            feelsLikeText.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            feelsLikeText.leadingAnchor.constraint(equalTo: mainScrollView.leadingAnchor, constant: 10),
             feelsLikeLabel.topAnchor.constraint(equalTo: feelsLikeText.bottomAnchor, constant: 10),
             feelsLikeLabel.leadingAnchor.constraint(equalTo: feelsLikeText.leadingAnchor, constant: 5)
         ])
     }
     func setupHumidity() {
-        addSubview(humidityText)
-        addSubview(humidityLabel)
+        mainScrollView.addSubview(humidityText)
+        mainScrollView.addSubview(humidityLabel)
         humidityText.translatesAutoresizingMaskIntoConstraints = false
         humidityLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -216,8 +216,8 @@ class WeatherMainView: UIView {
         ])
     }
     func setupWindDirection() {
-        addSubview(windDirectionLabel)
-        addSubview(windSpeedLabel)
+        mainScrollView.addSubview(windDirectionLabel)
+        mainScrollView.addSubview(windSpeedLabel)
         windDirectionLabel.translatesAutoresizingMaskIntoConstraints = false
         windSpeedLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -228,20 +228,20 @@ class WeatherMainView: UIView {
         ])
     }
     func setupVisibility() {
-        addSubview(visibilityText)
-        addSubview(visibilityLabel)
+        mainScrollView.addSubview(visibilityText)
+        mainScrollView.addSubview(visibilityLabel)
         visibilityText.translatesAutoresizingMaskIntoConstraints = false
         visibilityLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             visibilityText.topAnchor.constraint(equalTo: weatherLabel.bottomAnchor, constant: 20),
-            visibilityText.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor, constant: 50),
+            visibilityText.centerXAnchor.constraint(equalTo: mainScrollView.centerXAnchor, constant: 50),
             visibilityLabel.topAnchor.constraint(equalTo: visibilityText.bottomAnchor, constant: 10),
             visibilityLabel.leadingAnchor.constraint(equalTo: visibilityText.leadingAnchor, constant: 5)
         ])
     }
     func setupSunrise() {
-        addSubview(sunriseText)
-        addSubview(sunriseLabel)
+        mainScrollView.addSubview(sunriseText)
+        mainScrollView.addSubview(sunriseLabel)
         sunriseText.translatesAutoresizingMaskIntoConstraints = false
         sunriseLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -252,8 +252,8 @@ class WeatherMainView: UIView {
         ])
     }
     func setupSunset() {
-        addSubview(sunsetText)
-        addSubview(sunsetLabel)
+        mainScrollView.addSubview(sunsetText)
+        mainScrollView.addSubview(sunsetLabel)
         sunsetText.translatesAutoresizingMaskIntoConstraints = false
         sunsetLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -264,7 +264,7 @@ class WeatherMainView: UIView {
         ])
     }
     func setupLocate() {
-        addSubview(locateButton)
+        mainScrollView.addSubview(locateButton)
         locateButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
         
