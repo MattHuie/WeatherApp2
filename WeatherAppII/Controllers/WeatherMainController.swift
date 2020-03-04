@@ -5,7 +5,13 @@ class WeatherMainController: UIViewController {
     let mainView = WeatherMainScrollView()
     
     var weatherForcast = [WeatherStats]()
-    var weatherCurrent: WeatherInformation?
+    var weatherCurrent: WeatherInformation?{
+        didSet{
+            DispatchQueue.main.async {
+                self.viewDidLoadSetup()
+            }
+        }
+    }
     var weatherHourly = [WeatherStatsHourly]()
     var navagationItem = UINavigationItem.init(title: "")
     
@@ -21,19 +27,18 @@ class WeatherMainController: UIViewController {
     
     func getWeatherInfo() {
         WeatherAPIClient.weatherAPI(zipcode: "") { (error, data) in
-            if let data = data {
-                self.weatherForcast = data
-            }else if let error = error {
+            if let error = error{
                 print(error)
+            }else if let data = data {
+                self.weatherForcast = data
             }
         }
         WeatherAPIClient.weatherCurrentAPI(zipcode: "") { (error, data) in
-            if let data = data {
-                       self.weatherCurrent = data
-                print(self.weatherCurrent)
-                   }else if let error = error {
-                       print(error)
-                   }
+           if let error = error {
+            print(error)
+                   }else  if let data = data {
+                        self.weatherCurrent = data
+            }
         }
         
         WeatherAPIClient.weatherHourlyAPI(zipcode: "") { (error, data) in
@@ -41,14 +46,33 @@ class WeatherMainController: UIViewController {
                        print(error)
                    }else if let data = data {
                           self.weatherHourly = data
-                   print(self.weatherHourly.count)
                       }
         }
-    
+
     }
     @objc func SegueToLocationVC(_ sender: UIButton!){
     let viewController = SettingsController()
     self.navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func viewDidLoadSetup(){
+        if let currentWeather = weatherCurrent{
+            mainView.feelsLikeLabel.text = "\(currentWeather.feelslikeF) °"
+            mainView.humidityLabel.text = "\(currentWeather.humidity)"
+            
+          let timeInDoubleSunset = Double(currentWeather.sunset)
+           let timeInDoubleSunrise = Double(currentWeather.sunrise)
+            let sunrise = Date(timeIntervalSince1970: timeInDoubleSunrise)
+            let sunset = Date(timeIntervalSince1970: timeInDoubleSunset)
+            
+            mainView.sunriseLabel.text = "\(sunset)"
+            mainView.sunsetLabel.text = "\(sunrise)"
+            mainView.visibilityLabel.text = "\(currentWeather.visibilityMI) Miles"
+            mainView.windSpeedLabel.text = "Wind Speed: \(currentWeather.windMPH) MPH"
+            mainView.windDirectionLabel.text = "Wind Direction: \(currentWeather.windDir)"
+            mainView.temperatureLabel.text = "\(currentWeather.tempF) °"
+        }
+        
     }
 }
 
