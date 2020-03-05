@@ -36,7 +36,7 @@ class SettingsView: UIView {
     }
     
     private func commonInit() {
-        backgroundColor = .white
+        backgroundColor = .gray
         setupView()
     }
     
