@@ -108,6 +108,16 @@ class WeatherMainScrollView: UIScrollView {
         let button = UIButton()
         return button
     }()
+    
+    lazy var forcastCollectionView: UICollectionView = {
+       var collectionLayout = UICollectionViewFlowLayout()
+        collectionLayout.scrollDirection = .horizontal
+               collectionLayout.itemSize = CGSize.init(width: 250, height: 400)
+        var collection = UICollectionView(frame: UIScreen.main.bounds, collectionViewLayout: collectionLayout)
+        collection.backgroundColor = .white
+               return collection
+        
+        }()
 
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
@@ -122,6 +132,7 @@ class WeatherMainScrollView: UIScrollView {
         setupVisibility()
         setupSunrise()
         setupSunset()
+        setupCollectionView()
     }
         
         required init?(coder: NSCoder) {
@@ -231,6 +242,19 @@ class WeatherMainScrollView: UIScrollView {
         locateButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
         
+        ])
+    }
+    
+    
+    func setupCollectionView() {
+        addSubview(forcastCollectionView)
+        forcastCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            forcastCollectionView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            forcastCollectionView.topAnchor.constraint(equalTo: windSpeedLabel.bottomAnchor, constant: 40),
+            forcastCollectionView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.3),
+            forcastCollectionView.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor, constant: 5),
+            forcastCollectionView.rightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.rightAnchor, constant: -5)
         ])
     }
 }
