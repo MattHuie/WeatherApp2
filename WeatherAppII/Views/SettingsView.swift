@@ -12,7 +12,18 @@ class SettingsView: UIView {
     
     public lazy var tempuratureLabel: UILabel = {
         let label = UILabel.init(frame: self.bounds)
+        label.text = "Temperature Type"
+        label.textColor = .black
+        label.textAlignment = .center
         return label
+    }()
+    
+    public lazy var locationsButton: UIButton = {
+        let button = UIButton.init(frame: self.bounds)
+        button.backgroundColor = .black
+        button.layer.cornerRadius = 10
+        button.setTitle("Add Places", for: .normal)
+        return button
     }()
     
     override init(frame: CGRect) {
@@ -33,24 +44,39 @@ class SettingsView: UIView {
 
 extension SettingsView {
     private func setupView() {
+        setupLabel()
         setupSegmentedControlTemp()
-    }
-    
-    private func setupSegmentedControlTemp() {
-        addSubview(segmentedControlTemp)
-        segmentedControlTemp.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            segmentedControlTemp.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 50),
-            segmentedControlTemp.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            segmentedControlTemp.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor)
-        ])
+        setupLocationsButton()
     }
     
     private func setupLabel() {
         addSubview(tempuratureLabel)
         tempuratureLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-        
+            tempuratureLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 50),
+            tempuratureLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 11),
+            tempuratureLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -11),
+            tempuratureLabel.heightAnchor.constraint(equalToConstant: 20)
         ])
     }
+    
+    private func setupSegmentedControlTemp() {
+        addSubview(segmentedControlTemp)
+        segmentedControlTemp.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            segmentedControlTemp.topAnchor.constraint(equalTo: tempuratureLabel.bottomAnchor, constant: 10),
+            segmentedControlTemp.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+            segmentedControlTemp.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor)
+        ])
+    }
+    private func setupLocationsButton() {
+        addSubview(locationsButton)
+        locationsButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            locationsButton.topAnchor.constraint(equalTo: segmentedControlTemp.bottomAnchor, constant: 40),
+            locationsButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            locationsButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor)
+        ])
+    }
+    
 }
