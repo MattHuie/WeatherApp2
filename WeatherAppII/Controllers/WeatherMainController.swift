@@ -82,8 +82,8 @@ class WeatherMainController: UIViewController {
             mainView.feelsLikeLabel.text = "\(currentWeather.feelslikeF) °"
             mainView.humidityLabel.text = "\(currentWeather.humidity)"
             
-          let timeInDoubleSunset = Double(currentWeather.sunset)
-           let timeInDoubleSunrise = Double(currentWeather.sunrise)
+            let timeInDoubleSunset = Double(currentWeather.sunset)
+            let timeInDoubleSunrise = Double(currentWeather.sunrise)
             let sunrise = Date(timeIntervalSince1970: timeInDoubleSunrise)
             let sunset = Date(timeIntervalSince1970: timeInDoubleSunset)
             
