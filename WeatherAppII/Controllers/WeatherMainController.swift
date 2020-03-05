@@ -18,7 +18,13 @@ class WeatherMainController: UIViewController {
             }
         }
     }
-    var weatherHourly = [WeatherStatsHourly]()
+    var weatherHourly = [WeatherStatsHourly](){
+        didSet {
+            DispatchQueue.main.async {
+                self.mainView.hourlyCollectionView.reloadData()
+            }
+        }
+    }
     var navagationItem = UINavigationItem.init(title: "")
     
     
@@ -30,6 +36,9 @@ class WeatherMainController: UIViewController {
 
         mainView.forcastCollectionView.dataSource = self
         mainView.forcastCollectionView.delegate = self
+        
+        mainView.hourlyCollectionView.dataSource = self
+        mainView.hourlyCollectionView.delegate = self
     }
     
     func viewDidLoadSetup(){
@@ -39,13 +48,14 @@ class WeatherMainController: UIViewController {
         getWeatherInfo()
         
         mainView.forcastCollectionView.register(ForcastCollectionViewCell.self, forCellWithReuseIdentifier: "Forcast")
+        mainView.hourlyCollectionView.register(HourlyCollectionViewCell.self, forCellWithReuseIdentifier: "Hourly")
     }
     
     func getWeatherInfo() {
         WeatherAPIClient.weatherAPI(zipcode: "") { (error, data) in
             if let error = error{
                 print(error)
-            }else if let data = data {
+            } else if let data = data {
                 self.weatherForcast = data
             }
         }
@@ -53,12 +63,12 @@ class WeatherMainController: UIViewController {
 
             if let data = data {
                        self.weatherCurrent = data
-                   }else if let error = error {
+                   } else if let error = error {
                        print(error)
                    }
            if let error = error {
-            print(error)
-                   }else  if let data = data {
+                print(error)
+                   } else if let data = data {
                         self.weatherCurrent = data
             }
         }
@@ -73,8 +83,8 @@ class WeatherMainController: UIViewController {
 
     }
     @objc func SegueToLocationVC(_ sender: UIButton!){
-    let viewController = SettingsController()
-    self.navigationController?.pushViewController(viewController, animated: true)
+        let viewController = SettingsController()
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
     
     func currentWeatherSetUp(){
@@ -103,10 +113,16 @@ class WeatherMainController: UIViewController {
 
 extension WeatherMainController: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return weatherForcast.count
+        if collectionView == mainView.forcastCollectionView {
+            return weatherForcast.count
+        } else {
+            return weatherHourly.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        if collectionView == mainView.forcastCollectionView {
         guard let cell =  mainView.forcastCollectionView.dequeueReusableCell(withReuseIdentifier: "Forcast", for: indexPath) as? ForcastCollectionViewCell else { return UICollectionViewCell()}
         
         cell.highTempLabel.text = "\(weatherForcast[indexPath.row].maxTempF)°"
@@ -118,6 +134,15 @@ extension WeatherMainController: UICollectionViewDelegate, UICollectionViewDataS
         
         
         return cell
+        } else {
+            guard let cell = mainView.hourlyCollectionView.dequeueReusableCell(withReuseIdentifier: "Hourly", for: indexPath) as? HourlyCollectionViewCell else { return UICollectionViewCell()}
+            let cellToSet = weatherHourly[indexPath.row]
+            cell.hourHighLabel.text = "\(cellToSet.maxTempF)°"
+            cell.hourLowLabel.text = "\(cellToSet.minTempF)°"
+            cell.hourLabel.text = "Hours"
+            cell.hourTempLabel.text = "\(cellToSet.tempF)"
+            return cell
+        }
     }
     
     
