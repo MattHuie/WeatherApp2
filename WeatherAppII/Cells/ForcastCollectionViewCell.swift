@@ -47,7 +47,7 @@ class ForcastCollectionViewCell: UICollectionViewCell {
     
     
     
-    func commonInit(){
+    private func commonInit(){
         dayOfTheWeekLabelSetup()
         numericDayValuelabelSetup()
         highTempLabelSetup()

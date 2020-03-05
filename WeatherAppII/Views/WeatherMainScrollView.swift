@@ -110,14 +110,21 @@ class WeatherMainScrollView: UIScrollView {
     }()
     
     lazy var forcastCollectionView: UICollectionView = {
-       var collectionLayout = UICollectionViewFlowLayout()
+        var collectionLayout = UICollectionViewFlowLayout()
         collectionLayout.scrollDirection = .horizontal
-               collectionLayout.itemSize = CGSize.init(width: 250, height: 400)
+        collectionLayout.itemSize = CGSize.init(width: 100, height: 200)
         var collection = UICollectionView(frame: UIScreen.main.bounds, collectionViewLayout: collectionLayout)
         collection.backgroundColor = .white
-               return collection
-        
-        }()
+        return collection
+    }()
+    lazy var hourlyCollectionView: UICollectionView = {
+        var collectionFlowLayout = UICollectionViewFlowLayout()
+        collectionFlowLayout.scrollDirection = .horizontal
+        collectionFlowLayout.itemSize = CGSize(width: 100, height: 200)
+        var collectionView = UICollectionView(frame: UIScreen.main.bounds, collectionViewLayout: collectionFlowLayout)
+        collectionView.backgroundColor = .white
+        return collectionView
+    }()
 
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
@@ -126,13 +133,14 @@ class WeatherMainScrollView: UIScrollView {
         setupCityState()
         setupTemperature()
         setupWeather()
+        setupHourlyCollectionView()
         setupFeelsLike()
         setupHumidity()
         setupWindDirection()
         setupVisibility()
         setupSunrise()
         setupSunset()
-        setupCollectionView()
+        setupForcastCollectionView()
     }
         
         required init?(coder: NSCoder) {
@@ -152,9 +160,9 @@ class WeatherMainScrollView: UIScrollView {
         temperatureLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             temperatureLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0),
-            temperatureLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -250),
-            temperatureLabel.heightAnchor.constraint(equalToConstant: 150),
-            temperatureLabel.widthAnchor.constraint(equalToConstant: 150)
+            temperatureLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -350),
+            temperatureLabel.heightAnchor.constraint(equalToConstant: 100),
+            temperatureLabel.widthAnchor.constraint(equalToConstant: 100)
         ])
     }
     func setupWeather() {
@@ -165,13 +173,24 @@ class WeatherMainScrollView: UIScrollView {
             weatherLabel.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor, constant: 0)
         ])
     }
+    func setupHourlyCollectionView() {
+        addSubview(hourlyCollectionView)
+        hourlyCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            hourlyCollectionView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            hourlyCollectionView.topAnchor.constraint(equalTo: weatherLabel.bottomAnchor, constant: 20),
+            hourlyCollectionView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.25),
+            hourlyCollectionView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 5),
+            hourlyCollectionView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -5)
+        ])
+    }
     func setupFeelsLike() {
         addSubview(feelsLikeText)
         addSubview(feelsLikeLabel)
         feelsLikeText.translatesAutoresizingMaskIntoConstraints = false
         feelsLikeLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            feelsLikeText.topAnchor.constraint(equalTo: weatherLabel.bottomAnchor, constant: 20),
+            feelsLikeText.topAnchor.constraint(equalTo: hourlyCollectionView.bottomAnchor, constant: 20),
             feelsLikeText.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 10),
             feelsLikeLabel.topAnchor.constraint(equalTo: feelsLikeText.bottomAnchor, constant: 10),
             feelsLikeLabel.leadingAnchor.constraint(equalTo: feelsLikeText.leadingAnchor, constant: 5)
@@ -207,7 +226,7 @@ class WeatherMainScrollView: UIScrollView {
         visibilityText.translatesAutoresizingMaskIntoConstraints = false
         visibilityLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            visibilityText.topAnchor.constraint(equalTo: weatherLabel.bottomAnchor, constant: 20),
+            visibilityText.topAnchor.constraint(equalTo: hourlyCollectionView.bottomAnchor, constant: 20),
             visibilityText.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor, constant: 50),
             visibilityLabel.topAnchor.constraint(equalTo: visibilityText.bottomAnchor, constant: 10),
             visibilityLabel.leadingAnchor.constraint(equalTo: visibilityText.leadingAnchor, constant: 5)
@@ -246,13 +265,13 @@ class WeatherMainScrollView: UIScrollView {
     }
     
     
-    func setupCollectionView() {
+    func setupForcastCollectionView() {
         addSubview(forcastCollectionView)
         forcastCollectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             forcastCollectionView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             forcastCollectionView.topAnchor.constraint(equalTo: windSpeedLabel.bottomAnchor, constant: 40),
-            forcastCollectionView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.3),
+            forcastCollectionView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.25),
             forcastCollectionView.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor, constant: 5),
             forcastCollectionView.rightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.rightAnchor, constant: -5)
         ])
