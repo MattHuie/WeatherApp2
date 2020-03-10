@@ -27,6 +27,9 @@
 		096F3E8A240FFCD900B577E0 /* AlertExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096F3E89240FFCD900B577E0 /* AlertExtentions.swift */; };
 		93B8BE77241014CD005F89B8 /* WeatherMainScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B8BE76241014CD005F89B8 /* WeatherMainScrollView.swift */; };
 		93B8BE7B241188CD005F89B8 /* HourlyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B8BE7A241188CD005F89B8 /* HourlyCollectionViewCell.swift */; };
+		966ECF7A2417EC0700FB2744 /* CityImagesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966ECF792417EC0700FB2744 /* CityImagesModel.swift */; };
+		966ECF7C2417EE3800FB2744 /* ZipcodeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966ECF7B2417EE3800FB2744 /* ZipcodeHelper.swift */; };
+		966ECF7E2417EE6F00FB2744 /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966ECF7D2417EE6F00FB2744 /* ImageHelper.swift */; };
 		96BCA34E24115C4000D95D7E /* ForcastCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96BCA34D24115C4000D95D7E /* ForcastCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +56,9 @@
 		096F3E89240FFCD900B577E0 /* AlertExtentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertExtentions.swift; sourceTree = "<group>"; };
 		93B8BE76241014CD005F89B8 /* WeatherMainScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherMainScrollView.swift; sourceTree = "<group>"; };
 		93B8BE7A241188CD005F89B8 /* HourlyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyCollectionViewCell.swift; sourceTree = "<group>"; };
+		966ECF792417EC0700FB2744 /* CityImagesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityImagesModel.swift; sourceTree = "<group>"; };
+		966ECF7B2417EE3800FB2744 /* ZipcodeHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipcodeHelper.swift; sourceTree = "<group>"; };
+		966ECF7D2417EE6F00FB2744 /* ImageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
 		96BCA34D24115C4000D95D7E /* ForcastCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForcastCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -128,6 +134,8 @@
 				096A0B51240EE0D4008278D2 /* AppError.swift */,
 				096A0B54240EE0EE008278D2 /* NetworkHelper.swift */,
 				096A0B56240EE0FA008278D2 /* WeatherAPIClient.swift */,
+				966ECF7B2417EE3800FB2744 /* ZipcodeHelper.swift */,
+				966ECF7D2417EE6F00FB2744 /* ImageHelper.swift */,
 			);
 			path = "Network Services";
 			sourceTree = "<group>";
@@ -138,6 +146,7 @@
 				096A0B58240EE10F008278D2 /* WeatherModelAPI.swift */,
 				096A0B5B240EE12F008278D2 /* WeatherCurrentModel.swift */,
 				096A0B5D240EE137008278D2 /* WeatherHourlyModel.swift */,
+				966ECF792417EC0700FB2744 /* CityImagesModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -250,13 +259,16 @@
 				096A0B55240EE0EE008278D2 /* NetworkHelper.swift in Sources */,
 				096A0B57240EE0FA008278D2 /* WeatherAPIClient.swift in Sources */,
 				096A0B59240EE10F008278D2 /* WeatherModelAPI.swift in Sources */,
+				966ECF7A2417EC0700FB2744 /* CityImagesModel.swift in Sources */,
 				096F3E8A240FFCD900B577E0 /* AlertExtentions.swift in Sources */,
+				966ECF7C2417EE3800FB2744 /* ZipcodeHelper.swift in Sources */,
 				096A0B33240EDF4D008278D2 /* WeatherMainController.swift in Sources */,
 				096A0B4B240EE042008278D2 /* LocationListView.swift in Sources */,
 				096A0B2F240EDF4D008278D2 /* AppDelegate.swift in Sources */,
 				096A0B5C240EE12F008278D2 /* WeatherCurrentModel.swift in Sources */,
 				096A0B31240EDF4D008278D2 /* SceneDelegate.swift in Sources */,
 				096A0B60240EE5EB008278D2 /* SecretKeys.swift in Sources */,
+				966ECF7E2417EE6F00FB2744 /* ImageHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
