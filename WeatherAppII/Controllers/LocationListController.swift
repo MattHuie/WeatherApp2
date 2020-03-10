@@ -9,7 +9,7 @@ class LocationListController: UIViewController {
         view.addSubview(locationView)
         locationView.locationTable.dataSource = self
         locationView.locationTable.delegate = self
-
+        navigationItem.title = "places"
 
     }
 
