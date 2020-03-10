@@ -134,7 +134,7 @@ class WeatherMainScrollView: UIScrollView {
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
         self.backgroundColor = .clear
-        self.contentSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height + 300)
+        self.contentSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         setUpImage()
         setupCityState()
         setupTemperature()
@@ -160,13 +160,13 @@ class WeatherMainScrollView: UIScrollView {
         cityImage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             
-            cityImage.topAnchor.constraint(equalTo: topAnchor),
-            cityImage.heightAnchor.constraint(equalTo: heightAnchor),
-            cityImage.bottomAnchor.constraint(equalTo: bottomAnchor),
-            cityImage.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0),
-             cityImage.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0),
-            cityImage.trailingAnchor.constraint(equalTo: trailingAnchor),
-            cityImage.leadingAnchor.constraint(equalTo: leadingAnchor)
+            cityImage.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: -150),
+//            cityImage.heightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.heightAnchor),
+            cityImage.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
+            cityImage.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor, constant: 0),
+             cityImage.centerYAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerYAnchor, constant: 0),
+            cityImage.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
+            cityImage.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor)
         ])
     }
 
