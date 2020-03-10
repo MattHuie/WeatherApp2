@@ -18,6 +18,14 @@ class WeatherMainController: UIViewController {
             }
         }
     }
+    
+    var cityImage: UIImage?{
+        didSet{
+            DispatchQueue.main.async {
+                self.mainView.cityImage.image = self.cityImage
+            }
+        }
+    }
     var weatherHourly = [WeatherStatsHourly](){
         didSet {
             DispatchQueue.main.async {
@@ -33,10 +41,9 @@ class WeatherMainController: UIViewController {
         super.viewDidLoad()
         view.addSubview(mainView)
         viewDidLoadSetup()
-
+        
         mainView.forcastCollectionView.dataSource = self
         mainView.forcastCollectionView.delegate = self
-        
         mainView.hourlyCollectionView.dataSource = self
         mainView.hourlyCollectionView.delegate = self
     }
@@ -49,6 +56,8 @@ class WeatherMainController: UIViewController {
         
         mainView.forcastCollectionView.register(ForcastCollectionViewCell.self, forCellWithReuseIdentifier: "Forcast")
         mainView.hourlyCollectionView.register(HourlyCollectionViewCell.self, forCellWithReuseIdentifier: "Hourly")
+        
+        imageHelper()
     }
     
     func getWeatherInfo() {
@@ -80,7 +89,26 @@ class WeatherMainController: UIViewController {
                           self.weatherHourly = data
                       }
         }
+        
 
+    }
+    
+    func imageHelper(){
+        WeatherAPIClient.weatherImageAPI(location: "") { (error, image) in
+            if let error = error{
+                self.showAlert(title: "Error", message: error.errorMessage())
+            }else if let image = image{
+                guard let url = URL(string: image[0].largeImageURL) else{ return self.showAlert(title: "Error", message: "Url conversion failed")
+                }
+                ImageHelper.fetchImage(url: url) { (imageError, cityPicture) in
+                    if let imageError = imageError{
+                        self.showAlert(title: "Error", message: imageError.errorMessage())
+                    }else if let cityPiture = cityPicture{
+                        self.cityImage = cityPiture
+                    }
+                }
+            }
+        }
     }
     @objc func SegueToLocationVC(_ sender: UIButton!){
         let viewController = SettingsController()
