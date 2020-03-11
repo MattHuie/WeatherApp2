@@ -22,7 +22,7 @@ class SettingsView: UIView {
         let button = UIButton.init(frame: self.bounds)
         button.backgroundColor = .black
         button.layer.cornerRadius = 10
-        button.setTitle("Add Places", for: .normal)
+        button.setTitle("Places", for: .normal)
         return button
     }()
     
