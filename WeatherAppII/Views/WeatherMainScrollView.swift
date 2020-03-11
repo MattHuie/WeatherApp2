@@ -161,7 +161,13 @@ class WeatherMainScrollView: UIScrollView {
         addSubview(cityImage)
         cityImage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-           
+                cityImage.topAnchor.constraint(equalTo: topAnchor),
+                cityImage.heightAnchor.constraint(equalTo: heightAnchor),
+                cityImage.bottomAnchor.constraint(equalTo: bottomAnchor),
+                cityImage.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0),
+                cityImage.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0),
+                cityImage.trailingAnchor.constraint(equalTo: trailingAnchor),
+                cityImage.leadingAnchor.constraint(equalTo: leadingAnchor)
 
         ])
     }
