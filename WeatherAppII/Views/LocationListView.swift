@@ -2,8 +2,17 @@ import UIKit
 
 class LocationListView: UIView {
 
+    public lazy var placesSearchBar: UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.barTintColor = .white
+        searchBar.placeholder = "Insert City or Zipcode"
+        searchBar.searchBarStyle = .default
+        return searchBar
+    }()
+    
     public lazy var locationTable: UITableView = {
         let tableView = UITableView()
+        tableView.backgroundColor = .white
         return tableView
     }()
 
@@ -18,21 +27,32 @@ class LocationListView: UIView {
     }
 
     private func commonInit() {
-        self.backgroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
+        self.backgroundColor = .gray
+        self.locationTable.register(LocationTableViewCell.self, forCellReuseIdentifier: "LocationList")
         setupView()
     }
 }
 
 extension LocationListView {
     private func setupView() {
+        setupSearchBar()
         setupTableView()
     }
-
+    
+    private func setupSearchBar(){
+        addSubview(placesSearchBar)
+        placesSearchBar.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            placesSearchBar.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            placesSearchBar.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            placesSearchBar.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor)
+        ])
+    }
     private func setupTableView() {
         addSubview(locationTable)
         locationTable.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            locationTable.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            locationTable.topAnchor.constraint(equalTo: placesSearchBar.bottomAnchor),
             locationTable.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
             locationTable.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             locationTable.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor)

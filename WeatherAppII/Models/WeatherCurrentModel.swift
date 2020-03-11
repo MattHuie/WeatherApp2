@@ -1,7 +1,7 @@
 import Foundation
 
 struct WeatherCurrentModel: Codable {
-    let error: String
+    let error: String?
     let response: WeatherDetail
 }
 
@@ -12,14 +12,14 @@ struct WeatherDetail: Codable {
 
 struct WeatherInformation: Codable {
     let tempC: Double
-    let tempF: Double
+    let tempF: Int
     let humidity: Int
     let windKPH: Int
     let windMPH: Int
     let feelslikeC: Int
     let feelslikeF: Int
-    let visibilityKM: Int
-    let visibilityMI: Int
+    let visibilityKM: Double
+    let visibilityMI: Double
     let weather: String
     let icon: String
     let windDir: String
