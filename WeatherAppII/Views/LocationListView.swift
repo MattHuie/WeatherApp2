@@ -28,6 +28,7 @@ class LocationListView: UIView {
 
     private func commonInit() {
         self.backgroundColor = .gray
+        self.locationTable.register(LocationTableViewCell.self, forCellReuseIdentifier: "LocationList")
         setupView()
     }
 }

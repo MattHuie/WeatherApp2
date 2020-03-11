@@ -12,23 +12,21 @@ class LocationListController: UIViewController {
         locationView.locationTable.dataSource = self
         locationView.locationTable.delegate = self
 
+
     }
     
     func dismissKeyboard() {
         locationView.placesSearchBar.resignFirstResponder()
     }
-
-
-
-
 }
 extension LocationListController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        0
+        5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "LocationList", for: indexPath) as? LocationTableViewCell else {return UITableViewCell()}
+        return cell
     }
     
     
