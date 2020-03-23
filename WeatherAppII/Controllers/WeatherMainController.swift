@@ -131,6 +131,8 @@ class WeatherMainController: UIViewController {
             mainView.windSpeedLabel.text = "Wind Speed: \(currentWeather.windMPH) MPH"
             mainView.windDirectionLabel.text = "Wind Direction: \(currentWeather.windDir)"
             mainView.temperatureLabel.text = "\(currentWeather.tempF) °"
+            mainView.weatherLabel.text = "\(currentWeather.weather.capitalized)"
+            mainView.stateLabel.text = "State"
         }
         
     }
@@ -155,7 +157,7 @@ extension WeatherMainController: UICollectionViewDelegate, UICollectionViewDataS
         
         cell.highTempLabel.text = "\(weatherForcast[indexPath.row].maxTempF)°"
         cell.lowTempLabel.text = "\(weatherForcast[indexPath.row].minTempF)°"
-        cell.dayOfTheWeekLabel.text = "Monday"
+            cell.dayOfTheWeekLabel.text = "\(weatherForcast[indexPath.row].validTime)"
         cell.numericDayValuelabel.text = "2/29"
         
         
@@ -167,7 +169,7 @@ extension WeatherMainController: UICollectionViewDelegate, UICollectionViewDataS
             let cellToSet = weatherHourly[indexPath.row]
             cell.hourHighLabel.text = "\(cellToSet.maxTempF)°"
             cell.hourLowLabel.text = "\(cellToSet.minTempF)°"
-            cell.hourLabel.text = "Hours"
+            cell.hourLabel.text = "\(cellToSet.dateTimeISO)"
             cell.hourTempLabel.text = "\(cellToSet.tempF)°"
             return cell
         }
