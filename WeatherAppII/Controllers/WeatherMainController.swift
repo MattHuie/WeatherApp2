@@ -148,23 +148,13 @@ extension WeatherMainController: UICollectionViewDelegate, UICollectionViewDataS
         
         if collectionView == mainView.forcastCollectionView {
         guard let cell =  mainView.forcastCollectionView.dequeueReusableCell(withReuseIdentifier: "Forcast", for: indexPath) as? ForcastCollectionViewCell else { return UICollectionViewCell()}
-        
-<<<<<<< HEAD
+            
             cell.highTempLabel.text = "\(weatherForcast[indexPath.row].maxTempF)°"
             cell.lowTempLabel.text = "\(weatherForcast[indexPath.row].minTempF)°"
             let date = dateReturner(date: weatherForcast[indexPath.row].validTime)
             cell.dayOfTheWeekLabel.text = date[1]
             cell.numericDayValuelabel.text = date[0]
-=======
-        cell.highTempLabel.text = "\(weatherForcast[indexPath.row].maxTempF)°"
-        cell.lowTempLabel.text = "\(weatherForcast[indexPath.row].minTempF)°"
-            cell.dayOfTheWeekLabel.text = "\(weatherForcast[indexPath.row].validTime)"
-        cell.numericDayValuelabel.text = "2/29"
-        
-        
->>>>>>> 86b0a68dbd729ad80d3a0a87daccbf7791c583d8
-        
-        
+
         return cell
             
         } else {
@@ -172,11 +162,7 @@ extension WeatherMainController: UICollectionViewDelegate, UICollectionViewDataS
             let cellToSet = weatherHourly[indexPath.row]
             cell.hourHighLabel.text = "\(cellToSet.maxTempF)°"
             cell.hourLowLabel.text = "\(cellToSet.minTempF)°"
-<<<<<<< HEAD
             cell.hourLabel.text = timeConverter(date: cellToSet.dateTimeISO)
-=======
-            cell.hourLabel.text = "\(cellToSet.dateTimeISO)"
->>>>>>> 86b0a68dbd729ad80d3a0a87daccbf7791c583d8
             cell.hourTempLabel.text = "\(cellToSet.tempF)°"
             return cell
         }
