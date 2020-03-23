@@ -49,7 +49,7 @@ class WeatherMainController: UIViewController {
     }
     
     func viewDidLoadSetup(){
-        navigationController?.navigationBar.prefersLargeTitles = true
+//        navigationController?.navigationBar.prefersLargeTitles = true
         self.title = "City"
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Settings", style: .done, target: self, action: #selector(SegueToLocationVC))
         getWeatherInfo()
@@ -168,7 +168,7 @@ extension WeatherMainController: UICollectionViewDelegate, UICollectionViewDataS
             cell.hourHighLabel.text = "\(cellToSet.maxTempF)°"
             cell.hourLowLabel.text = "\(cellToSet.minTempF)°"
             cell.hourLabel.text = "Hours"
-            cell.hourTempLabel.text = "\(cellToSet.tempF)"
+            cell.hourTempLabel.text = "\(cellToSet.tempF)°"
             return cell
         }
     }

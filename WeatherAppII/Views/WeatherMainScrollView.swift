@@ -21,85 +21,85 @@ class WeatherMainScrollView: UIScrollView {
         label.backgroundColor = .white
         return label
     }()
-    lazy var humidityText: UILabel = {
-        let label = UILabel()
+    lazy var humidityText: WRoundedCornersLabel = {
+        let label = WRoundedCornersLabel()
         label.text = "Humidity"
         label.backgroundColor = .white
         return label
     }()
-    lazy var humidityLabel: UILabel = {
-        let label = UILabel()
+    lazy var humidityLabel: WRoundedCornersLabel = {
+        let label = WRoundedCornersLabel()
         label.text = "Humidity Label"
         label.backgroundColor = .white
         return label
     }()
 
-    lazy var windDirectionLabel: UILabel = {
-        let label = UILabel()
+    lazy var windDirectionLabel: WRoundedCornersLabel = {
+        let label = WRoundedCornersLabel()
         label.text = "WindDirection Label"
         label.backgroundColor = .white
         return label
     }()
-    lazy var windSpeedLabel: UILabel = {
-        let label = UILabel()
+    lazy var windSpeedLabel: WRoundedCornersLabel = {
+        let label = WRoundedCornersLabel()
         label.text = "WindSpeed Label"
         label.backgroundColor = .white
         return label
     }()
 
-    lazy var feelsLikeText: UILabel = {
-        let label = UILabel()
+    lazy var feelsLikeText: WRoundedCornersLabel = {
+        let label = WRoundedCornersLabel()
         label.text = "Feels like"
         label.backgroundColor = .white
         return label
     }()
-    lazy var feelsLikeLabel: UILabel = {
-        let label = UILabel()
+    lazy var feelsLikeLabel: WRoundedCornersLabel = {
+        let label = WRoundedCornersLabel()
         label.text = "FeelsLike Label"
         label.backgroundColor = .white
         return label
     }()
 
-    lazy var visibilityText: UILabel = {
-        let label = UILabel()
+    lazy var visibilityText: WRoundedCornersLabel = {
+        let label = WRoundedCornersLabel()
         label.text = "Visibility"
         label.backgroundColor = .white
         return label
     }()
-    lazy var visibilityLabel: UILabel = {
-        let label = UILabel()
+    lazy var visibilityLabel: WRoundedCornersLabel = {
+        let label = WRoundedCornersLabel()
         label.text = "Visibility Label"
         label.backgroundColor = .white
         return label
     }()
 
-    lazy var weatherLabel: UILabel = {
-        let label = UILabel()
+    lazy var weatherLabel: WRoundedCornersLabel = {
+        let label = WRoundedCornersLabel()
         label.text = "Weather Label"
         label.backgroundColor = .white
         return label
     }()
-    lazy var sunriseText: UILabel = {
-        let label = UILabel()
+    lazy var sunriseText: WRoundedCornersLabel = {
+        let label = WRoundedCornersLabel()
         label.text = "Sunrise"
         label.backgroundColor = .white
         return label
     }()
-    lazy var sunriseLabel: UILabel = {
-        let label = UILabel()
+    lazy var sunriseLabel: WRoundedCornersLabel = {
+        let label = WRoundedCornersLabel()
         label.text = "Sunrise Label"
         label.backgroundColor = .white
         return label
     }()
 
-    lazy var sunsetText: UILabel = {
-        let label = UILabel()
+    lazy var sunsetText: WRoundedCornersLabel = {
+        let label = WRoundedCornersLabel()
         label.text = "Sunset"
         label.backgroundColor = .white
         return label
     }()
-    lazy var sunsetLabel: UILabel = {
-        let label = UILabel()
+    lazy var sunsetLabel: WRoundedCornersLabel = {
+        let label = WRoundedCornersLabel()
         label.text = "Sunset Label"
         label.backgroundColor = .white
         return label
@@ -114,19 +114,19 @@ class WeatherMainScrollView: UIScrollView {
         return image
     }()
     
-    lazy var forcastCollectionView: UICollectionView = {
+    lazy var forcastCollectionView: WRoundedCornersCV = {
         var collectionLayout = UICollectionViewFlowLayout()
         collectionLayout.scrollDirection = .horizontal
         collectionLayout.itemSize = CGSize.init(width: 100, height: 200)
-        var collection = UICollectionView(frame: UIScreen.main.bounds, collectionViewLayout: collectionLayout)
+        var collection = WRoundedCornersCV(frame: UIScreen.main.bounds, collectionViewLayout: collectionLayout)
         collection.backgroundColor = .white
         return collection
     }()
-    lazy var hourlyCollectionView: UICollectionView = {
+    lazy var hourlyCollectionView: WRoundedCornersCV = {
         var collectionFlowLayout = UICollectionViewFlowLayout()
         collectionFlowLayout.scrollDirection = .horizontal
         collectionFlowLayout.itemSize = CGSize(width: 100, height: 200)
-        var collectionView = UICollectionView(frame: UIScreen.main.bounds, collectionViewLayout: collectionFlowLayout)
+        var collectionView = WRoundedCornersCV(frame: UIScreen.main.bounds, collectionViewLayout: collectionFlowLayout)
         collectionView.backgroundColor = .white
         return collectionView
     }()
@@ -161,20 +161,14 @@ class WeatherMainScrollView: UIScrollView {
         addSubview(cityImage)
         cityImage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            cityImage.topAnchor.constraint(equalTo: topAnchor),
-            cityImage.heightAnchor.constraint(equalTo: heightAnchor),
-            cityImage.bottomAnchor.constraint(equalTo: bottomAnchor),
-            cityImage.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0),
-            cityImage.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0),
-            cityImage.trailingAnchor.constraint(equalTo: trailingAnchor),
-            cityImage.leadingAnchor.constraint(equalTo: leadingAnchor),
-            cityImage.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: -150),
-//            cityImage.heightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.heightAnchor),
-            cityImage.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
-            cityImage.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor, constant: 0),
-             cityImage.centerYAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerYAnchor, constant: 0),
-            cityImage.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
-            cityImage.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor)
+                cityImage.topAnchor.constraint(equalTo: topAnchor),
+                cityImage.heightAnchor.constraint(equalTo: heightAnchor),
+                cityImage.bottomAnchor.constraint(equalTo: bottomAnchor),
+                cityImage.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0),
+                cityImage.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0),
+                cityImage.trailingAnchor.constraint(equalTo: trailingAnchor),
+                cityImage.leadingAnchor.constraint(equalTo: leadingAnchor)
+
         ])
     }
 
@@ -208,7 +202,7 @@ class WeatherMainScrollView: UIScrollView {
         addSubview(hourlyCollectionView)
         hourlyCollectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            hourlyCollectionView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+//            hourlyCollectionView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             hourlyCollectionView.topAnchor.constraint(equalTo: weatherLabel.bottomAnchor, constant: 20),
             hourlyCollectionView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.25),
             hourlyCollectionView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 5),
@@ -300,7 +294,7 @@ class WeatherMainScrollView: UIScrollView {
         addSubview(forcastCollectionView)
         forcastCollectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            forcastCollectionView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+//            forcastCollectionView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             forcastCollectionView.topAnchor.constraint(equalTo: windSpeedLabel.bottomAnchor, constant: 40),
             forcastCollectionView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.25),
             forcastCollectionView.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor, constant: 5),

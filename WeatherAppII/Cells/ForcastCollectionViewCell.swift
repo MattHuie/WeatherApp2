@@ -63,10 +63,7 @@ class ForcastCollectionViewCell: UICollectionViewCell {
         
         NSLayoutConstraint.activate([
             dayOfTheWeekLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-
-            dayOfTheWeekLabel.topAnchor.constraint(equalTo: topAnchor, constant: 100),
-            dayOfTheWeekLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
-            dayOfTheWeekLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: 10)
+            dayOfTheWeekLabel.topAnchor.constraint(equalTo: topAnchor, constant: 100)
         ])
     }
     
@@ -76,9 +73,7 @@ class ForcastCollectionViewCell: UICollectionViewCell {
         
         NSLayoutConstraint.activate([
             numericDayValuelabel.topAnchor.constraint(equalTo: dayOfTheWeekLabel.bottomAnchor, constant: 10),
-//            numericDayValuelabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            numericDayValuelabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
-            numericDayValuelabel.rightAnchor.constraint(equalTo: rightAnchor, constant: 10)
+            numericDayValuelabel.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
     }
     
@@ -88,9 +83,7 @@ class ForcastCollectionViewCell: UICollectionViewCell {
         
         NSLayoutConstraint.activate([
             highTempLabel.topAnchor.constraint(equalTo: numericDayValuelabel.bottomAnchor, constant: 10),
-            highTempLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            highTempLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
-            highTempLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: 10)
+            highTempLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
     }
     
@@ -100,9 +93,7 @@ class ForcastCollectionViewCell: UICollectionViewCell {
         
         NSLayoutConstraint.activate([
             lowTempLabel.topAnchor.constraint(equalTo: highTempLabel.bottomAnchor, constant: 10),
-            lowTempLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            lowTempLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
-            lowTempLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: 10)
+            lowTempLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
     }
     
@@ -113,8 +104,6 @@ class ForcastCollectionViewCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             weatherImage.topAnchor.constraint(equalTo: lowTempLabel.bottomAnchor, constant: 10),
             weatherImage.centerXAnchor.constraint(equalTo: centerXAnchor),
-            weatherImage.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
-            weatherImage.rightAnchor.constraint(equalTo: rightAnchor, constant: 10),
             weatherImage.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5)
         ])
     }
