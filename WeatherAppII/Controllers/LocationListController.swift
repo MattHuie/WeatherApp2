@@ -23,13 +23,20 @@ class LocationListController: UIViewController {
     
     @objc func savePlace() {
         showAlert(title: "Saved", message: "Location has been saved")
-        let savedPlace = SavedLocations.init(cityName: "\(String(describing: locationView.placesSearchBar.text))", zipcode: " ")
+        let savedPlace = SavedLocations.init( zipcode: "\(locationView.placesSearchBar.text ?? "10002")")
         SavedLocationsModel.saveLocation(place: savedPlace)
+        self.reload()
     }
     
     func dismissKeyboard() {
         locationView.placesSearchBar.resignFirstResponder()
     }
+    
+    func reload() {
+        allSavedPlaces = SavedLocationsModel.getSavedLocation()
+        locationView.locationTable.reloadData()
+    }
+    
 }
 extension LocationListController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -39,10 +46,17 @@ extension LocationListController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "LocationList", for: indexPath) as? LocationTableViewCell else {return UITableViewCell()}
         let placeToSet = allSavedPlaces[indexPath.row]
-        cell.textLabel?.text = "\(placeToSet.cityName)"
+        cell.textLabel?.text = "\(placeToSet.zipcode)"
+        cell.backgroundColor = .white
+        cell.textLabel?.textColor = .black
         return cell
     }
-    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            SavedLocationsModel.delete(index: indexPath.row)
+            self.reload()
+        }
+    }
     
 }
 
