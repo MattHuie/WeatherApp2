@@ -18,8 +18,8 @@ struct WeatherStatsHourly: Codable {
     var tempF: Int
     var tempC: Double
     var humidity: Int
-    var feelslikeC: Int
-    var feelslikeF: Int
+    var feelslikeC: Double
+    var feelslikeF: Double
     var windDir: String
     var windSpeedKPH: Int
     var windSpeedMPH: Int

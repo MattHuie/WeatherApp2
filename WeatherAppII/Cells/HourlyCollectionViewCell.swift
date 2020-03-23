@@ -56,9 +56,7 @@ class HourlyCollectionViewCell: UICollectionViewCell {
         hourLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             hourLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            hourLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 100),
-            hourLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10),
-            hourLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 10)
+            hourLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 100)
         ])
     }
         
@@ -67,8 +65,7 @@ class HourlyCollectionViewCell: UICollectionViewCell {
         hourTempLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             hourTempLabel.topAnchor.constraint(equalTo: hourLabel.bottomAnchor, constant: 10),
-            hourTempLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10),
-            hourTempLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 10)
+            hourTempLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor)
         ])
     }
         
@@ -77,9 +74,7 @@ class HourlyCollectionViewCell: UICollectionViewCell {
         hourHighLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             hourHighLabel.topAnchor.constraint(equalTo: hourTempLabel.bottomAnchor, constant: 10),
-            hourHighLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            hourHighLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10),
-            hourHighLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 10)
+            hourHighLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor)
         ])
     }
         
@@ -88,9 +83,7 @@ class HourlyCollectionViewCell: UICollectionViewCell {
         hourLowLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             hourLowLabel.topAnchor.constraint(equalTo: hourHighLabel.bottomAnchor, constant: 10),
-            hourLowLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            hourLowLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10),
-            hourLowLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 10)
+            hourLowLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor)
         ])
     }
         
@@ -100,8 +93,6 @@ class HourlyCollectionViewCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             hourWeatherImage.topAnchor.constraint(equalTo: hourLowLabel.bottomAnchor, constant: 10),
             hourWeatherImage.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            hourWeatherImage.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10),
-            hourWeatherImage.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 10),
             hourWeatherImage.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5)
         ])
     }
