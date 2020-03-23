@@ -63,6 +63,7 @@ extension LocationListController: UITableViewDataSource, UITableViewDelegate {
 extension LocationListController: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         locationView.placesSearchBar.setShowsCancelButton(true, animated: true)
+        
     }
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         self.dismissKeyboard()
