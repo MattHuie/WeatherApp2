@@ -15,8 +15,9 @@ class WeatherMainScrollView: UIScrollView {
         label.backgroundColor = .white
         return label
     }()
-    lazy var temperatureLabel: UILabel = {
-        let label = UILabel()
+    lazy var temperatureLabel: WRoundedCornersLabel = {
+        let label = WRoundedCornersLabel()
+        label.font = UIFont.boldSystemFont(ofSize: 60.0)
         label.text = "Temperature Label"
         label.backgroundColor = .white
         return label
@@ -144,9 +145,9 @@ class WeatherMainScrollView: UIScrollView {
         setupHourlyCollectionView()
         setupFeelsLike()
         setupHumidity()
-        setupWindDirection()
-        setupVisibility()
         setupSunrise()
+        setupVisibility()
+        setupWindDirection()
         setupSunset()
         setupForcastCollectionView()
 
@@ -185,9 +186,7 @@ class WeatherMainScrollView: UIScrollView {
         temperatureLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             temperatureLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0),
-            temperatureLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -350),
-            temperatureLabel.heightAnchor.constraint(equalToConstant: 100),
-            temperatureLabel.widthAnchor.constraint(equalToConstant: 100)
+            temperatureLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -350)
         ])
     }
     func setupWeather() {
@@ -202,7 +201,6 @@ class WeatherMainScrollView: UIScrollView {
         addSubview(hourlyCollectionView)
         hourlyCollectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-//            hourlyCollectionView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             hourlyCollectionView.topAnchor.constraint(equalTo: weatherLabel.bottomAnchor, constant: 20),
             hourlyCollectionView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.25),
             hourlyCollectionView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 5),
@@ -233,16 +231,16 @@ class WeatherMainScrollView: UIScrollView {
             humidityLabel.leadingAnchor.constraint(equalTo: feelsLikeLabel.leadingAnchor, constant: 0)
         ])
     }
-    func setupWindDirection() {
-        addSubview(windDirectionLabel)
-        addSubview(windSpeedLabel)
-        windDirectionLabel.translatesAutoresizingMaskIntoConstraints = false
-        windSpeedLabel.translatesAutoresizingMaskIntoConstraints = false
+    func setupSunrise() {
+        addSubview(sunriseText)
+        addSubview(sunriseLabel)
+        sunriseText.translatesAutoresizingMaskIntoConstraints = false
+        sunriseLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            windDirectionLabel.topAnchor.constraint(equalTo: humidityLabel.bottomAnchor, constant: 20),
-            windDirectionLabel.leadingAnchor.constraint(equalTo: humidityText.leadingAnchor, constant: 0),
-            windSpeedLabel.topAnchor.constraint(equalTo: windDirectionLabel.bottomAnchor, constant: 10),
-            windSpeedLabel.leadingAnchor.constraint(equalTo: humidityLabel.leadingAnchor, constant: 0)
+            sunriseText.topAnchor.constraint(equalTo: humidityLabel.bottomAnchor, constant: 20),
+            sunriseText.leadingAnchor.constraint(equalTo: humidityText.leadingAnchor, constant: 0),
+            sunriseLabel.topAnchor.constraint(equalTo: sunriseText.bottomAnchor, constant: 10),
+            sunriseLabel.leadingAnchor.constraint(equalTo: humidityLabel.leadingAnchor, constant: 0)
         ])
     }
     func setupVisibility() {
@@ -257,16 +255,16 @@ class WeatherMainScrollView: UIScrollView {
             visibilityLabel.leadingAnchor.constraint(equalTo: visibilityText.leadingAnchor, constant: 5)
         ])
     }
-    func setupSunrise() {
-        addSubview(sunriseText)
-        addSubview(sunriseLabel)
-        sunriseText.translatesAutoresizingMaskIntoConstraints = false
-        sunriseLabel.translatesAutoresizingMaskIntoConstraints = false
+    func setupWindDirection() {
+        addSubview(windDirectionLabel)
+        addSubview(windSpeedLabel)
+        windDirectionLabel.translatesAutoresizingMaskIntoConstraints = false
+        windSpeedLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            sunriseText.topAnchor.constraint(equalTo: visibilityLabel.bottomAnchor, constant: 20),
-            sunriseText.leadingAnchor.constraint(equalTo: visibilityText.leadingAnchor, constant: 0),
-            sunriseLabel.topAnchor.constraint(equalTo: sunriseText.bottomAnchor, constant: 10),
-            sunriseLabel.leadingAnchor.constraint(equalTo: visibilityLabel.leadingAnchor, constant: 0)
+            windDirectionLabel.topAnchor.constraint(equalTo: visibilityLabel.bottomAnchor, constant: 20),
+            windDirectionLabel.leadingAnchor.constraint(equalTo: visibilityText.leadingAnchor, constant: 0),
+            windSpeedLabel.topAnchor.constraint(equalTo: windDirectionLabel.bottomAnchor, constant: 10),
+            windSpeedLabel.leadingAnchor.constraint(equalTo: visibilityLabel.leadingAnchor, constant: 0)
         ])
     }
     func setupSunset() {
@@ -275,10 +273,10 @@ class WeatherMainScrollView: UIScrollView {
         sunsetText.translatesAutoresizingMaskIntoConstraints = false
         sunsetLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            sunsetText.topAnchor.constraint(equalTo: sunriseLabel.bottomAnchor, constant: 20),
-            sunsetText.leadingAnchor.constraint(equalTo: sunriseText.leadingAnchor, constant: 0),
+            sunsetText.topAnchor.constraint(equalTo: windSpeedLabel.bottomAnchor, constant: 20),
+            sunsetText.leadingAnchor.constraint(equalTo: windDirectionLabel.leadingAnchor, constant: 0),
             sunsetLabel.topAnchor.constraint(equalTo: sunsetText.bottomAnchor, constant: 10),
-            sunsetLabel.leadingAnchor.constraint(equalTo: sunriseLabel.leadingAnchor, constant: 0)
+            sunsetLabel.leadingAnchor.constraint(equalTo: windSpeedLabel.leadingAnchor, constant: 0)
         ])
     }
     func setupLocate() {
@@ -294,8 +292,7 @@ class WeatherMainScrollView: UIScrollView {
         addSubview(forcastCollectionView)
         forcastCollectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-//            forcastCollectionView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            forcastCollectionView.topAnchor.constraint(equalTo: windSpeedLabel.bottomAnchor, constant: 40),
+            forcastCollectionView.topAnchor.constraint(equalTo: sunsetLabel.bottomAnchor, constant: 40),
             forcastCollectionView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.25),
             forcastCollectionView.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor, constant: 5),
             forcastCollectionView.rightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.rightAnchor, constant: -5)
