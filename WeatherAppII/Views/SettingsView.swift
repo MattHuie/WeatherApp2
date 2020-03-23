@@ -8,6 +8,7 @@ class SettingsView: UIView {
         segment.insertSegment(withTitle: "Celcius", at: 1, animated: true)
         segment.backgroundColor = .black
         segment.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.white], for: .normal)
+        segment.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.black], for: .selected)
         return segment
     }()
     
