@@ -16,8 +16,8 @@ struct WeatherInformation: Codable {
     let humidity: Int
     let windKPH: Int
     let windMPH: Int
-    let feelslikeC: Int
-    let feelslikeF: Int
+    let feelslikeC: Double
+    let feelslikeF: Double
     let visibilityKM: Double
     let visibilityMI: Double
     let weather: String
