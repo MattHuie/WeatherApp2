@@ -49,7 +49,6 @@ class WeatherMainController: UIViewController {
     }
     
     func viewDidLoadSetup(){
-//        navigationController?.navigationBar.prefersLargeTitles = true
         self.title = "City"
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Settings", style: .done, target: self, action: #selector(SegueToLocationVC))
         getWeatherInfo()
@@ -120,13 +119,8 @@ class WeatherMainController: UIViewController {
             mainView.feelsLikeLabel.text = "\(currentWeather.feelslikeF) °"
             mainView.humidityLabel.text = "\(currentWeather.humidity)"
             
-            let timeInDoubleSunset = Double(currentWeather.sunset)
-            let timeInDoubleSunrise = Double(currentWeather.sunrise)
-            let sunrise = Date(timeIntervalSince1970: timeInDoubleSunrise)
-            let sunset = Date(timeIntervalSince1970: timeInDoubleSunset)
-            
-            mainView.sunriseLabel.text = "\(sunset)"
-            mainView.sunsetLabel.text = "\(sunrise)"
+            mainView.sunriseLabel.text = sunTimeConverter(date: currentWeather.sunriseISO)
+            mainView.sunsetLabel.text = (sunTimeConverter(date: currentWeather.sunsetISO))
             mainView.visibilityLabel.text = "\(currentWeather.visibilityMI) Miles"
             mainView.windSpeedLabel.text = "Wind Speed: \(currentWeather.windMPH) MPH"
             mainView.windDirectionLabel.text = "Wind Direction: \(currentWeather.windDir)"
@@ -153,21 +147,21 @@ extension WeatherMainController: UICollectionViewDelegate, UICollectionViewDataS
         if collectionView == mainView.forcastCollectionView {
         guard let cell =  mainView.forcastCollectionView.dequeueReusableCell(withReuseIdentifier: "Forcast", for: indexPath) as? ForcastCollectionViewCell else { return UICollectionViewCell()}
         
-        cell.highTempLabel.text = "\(weatherForcast[indexPath.row].maxTempF)°"
-        cell.lowTempLabel.text = "\(weatherForcast[indexPath.row].minTempF)°"
-        cell.dayOfTheWeekLabel.text = "Monday"
-        cell.numericDayValuelabel.text = "2/29"
-        
-        
+            cell.highTempLabel.text = "\(weatherForcast[indexPath.row].maxTempF)°"
+            cell.lowTempLabel.text = "\(weatherForcast[indexPath.row].minTempF)°"
+            let date = dateReturner(date: weatherForcast[indexPath.row].validTime)
+            cell.dayOfTheWeekLabel.text = date[1]
+            cell.numericDayValuelabel.text = date[0]
         
         
         return cell
+            
         } else {
             guard let cell = mainView.hourlyCollectionView.dequeueReusableCell(withReuseIdentifier: "Hourly", for: indexPath) as? HourlyCollectionViewCell else { return UICollectionViewCell()}
             let cellToSet = weatherHourly[indexPath.row]
             cell.hourHighLabel.text = "\(cellToSet.maxTempF)°"
             cell.hourLowLabel.text = "\(cellToSet.minTempF)°"
-            cell.hourLabel.text = "Hours"
+            cell.hourLabel.text = timeConverter(date: cellToSet.dateTimeISO)
             cell.hourTempLabel.text = "\(cellToSet.tempF)°"
             return cell
         }
@@ -175,4 +169,70 @@ extension WeatherMainController: UICollectionViewDelegate, UICollectionViewDataS
     
     
     
+}
+
+extension WeatherMainController{
+    func timeConverter(date: String)-> String {
+        
+        var returnTime = ""
+        
+        let splitDateAndTime = date.components(separatedBy: "T")
+        
+        let splitTime = splitDateAndTime[1]
+        
+
+        let givenTimeFormat = DateFormatter()
+        givenTimeFormat.dateFormat = "HH:mm:ssZ"
+        let hourFormatter = DateFormatter()
+        hourFormatter.dateFormat = "h:mm a"
+        
+
+        if let currentTime = givenTimeFormat.date(from: splitTime){
+            returnTime = hourFormatter.string(from: currentTime)
+        }
+        return returnTime
+    }
+    
+    func dateReturner(date:String)-> [String]{
+        var returnDate = ""
+        
+        let splitDateAndTime = date.components(separatedBy: "T")
+
+        let splitDate = splitDateAndTime[0]
+        
+        let givenDateFormate = DateFormatter()
+        givenDateFormate.dateFormat = "yyyy-MM-dd"
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE, MM/dd"
+        if let currentDate = givenDateFormate.date(from: splitDate){
+            returnDate = dateFormatter.string(from: currentDate)
+        }
+            let returnDay = returnDate.split(separator: ",")
+            let returnDayOfTheWeek = returnDay[0]
+            let returnDayAndMonth = returnDay[1]
+            
+        return [String(returnDayAndMonth), String(returnDayOfTheWeek)]
+
+    }
+    
+    func sunTimeConverter(date: String)-> String {
+        
+        var returnTime = ""
+        
+        let splitDateAndTime = date.components(separatedBy: "T")
+        
+        let splitTime = splitDateAndTime[1]
+        
+
+        let givenTimeFormat = DateFormatter()
+        givenTimeFormat.dateFormat = "HH:mm:ssZ"
+        let hourFormatter = DateFormatter()
+        hourFormatter.dateFormat = "h:mm a"
+        
+
+        if let currentTime = givenTimeFormat.date(from: splitTime){
+            returnTime = hourFormatter.string(from: currentTime)
+        }
+        return returnTime
+    }
 }

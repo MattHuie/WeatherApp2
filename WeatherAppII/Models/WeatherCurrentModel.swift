@@ -23,8 +23,8 @@ struct WeatherInformation: Codable {
     let weather: String
     let icon: String
     let windDir: String
-    let sunrise: Int
-    let sunset: Int
+    let sunriseISO: String
+    let sunsetISO: String
 }
 
 struct LocationInfo: Codable {
