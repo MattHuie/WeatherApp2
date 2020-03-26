@@ -18,7 +18,6 @@ class WeatherMainController: UIViewController {
             }
         }
     }
-    
     var cityImage: UIImage?{
         didSet{
             DispatchQueue.main.async {
@@ -35,7 +34,7 @@ class WeatherMainController: UIViewController {
     }
     var navagationItem = UINavigationItem.init(title: "")
     
-    
+    var temperatureType = UserDefaults.standard.string(forKey: DefaultKeys.tempType)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -115,14 +114,36 @@ class WeatherMainController: UIViewController {
     
     func currentWeatherSetUp(){
         if let currentWeather = weatherCurrent{
-            mainView.feelsLikeLabel.text = "\(currentWeather.feelslikeF) °"
+            var windSpeed = "Wind Speed: \(currentWeather.windMPH) MPH"
+            var visibility = "\(currentWeather.visibilityMI) Miles"
+            var feelsLike = "\(currentWeather.feelslikeF)°f"
+            var currentTemp = "\(currentWeather.tempF)°f"
             mainView.humidityLabel.text = "\(currentWeather.humidity)"
             mainView.sunriseLabel.text = sunTimeConverter(date: currentWeather.sunriseISO)
             mainView.sunsetLabel.text = (sunTimeConverter(date: currentWeather.sunsetISO))
-            mainView.visibilityLabel.text = "\(currentWeather.visibilityMI) Miles"
-            mainView.windSpeedLabel.text = "Wind Speed: \(currentWeather.windMPH) MPH"
             mainView.windDirectionLabel.text = "Wind Direction: \(currentWeather.windDir)"
-            mainView.temperatureLabel.text = "\(currentWeather.tempF) °"
+            switch temperatureType{
+                case "fahrenheit":
+                    windSpeed = "Wind Speed: \(currentWeather.windMPH) MPH"
+                    visibility = "\(currentWeather.visibilityMI) Miles"
+                    feelsLike = "\(currentWeather.feelslikeF)°f"
+                    currentTemp = "\(currentWeather.tempF)°f"
+                case "celcius":
+                    windSpeed = "Wind Speed: \(currentWeather.windKPH) KPH"
+                    visibility = "\(currentWeather.visibilityKM) KM"
+                    feelsLike = "\(currentWeather.feelslikeC)°c"
+                    currentTemp = "\(currentWeather.tempC)°c"
+                default:
+                    windSpeed = "Wind Speed: \(currentWeather.windMPH) MPH"
+                    visibility = "\(currentWeather.visibilityMI) Miles"
+                    feelsLike = "\(currentWeather.feelslikeF)°f"
+                    currentTemp = "\(currentWeather.tempF)°f"
+            }
+            mainView.windSpeedLabel.text = windSpeed
+            mainView.visibilityLabel.text = visibility
+            mainView.feelsLikeLabel.text = feelsLike
+            mainView.temperatureLabel.text = currentTemp
+            
             mainView.weatherLabel.text = "\(currentWeather.weather.capitalized)"
             mainView.stateLabel.text = "State"
         }
@@ -146,10 +167,19 @@ extension WeatherMainController: UICollectionViewDelegate, UICollectionViewDataS
         
         if collectionView == mainView.forcastCollectionView {
         guard let cell =  mainView.forcastCollectionView.dequeueReusableCell(withReuseIdentifier: "Forcast", for: indexPath) as? ForcastCollectionViewCell else { return UICollectionViewCell()}
-            
-            cell.highTempLabel.text = "\(weatherForcast[indexPath.row].maxTempF)°"
-            cell.lowTempLabel.text = "\(weatherForcast[indexPath.row].minTempF)°"
-            let date = dateReturner(date: weatherForcast[indexPath.row].validTime)
+            let cellToSet = weatherForcast[indexPath.row]
+            switch temperatureType {
+            case "fahrenheit":
+                cell.highTempLabel.text = "\(cellToSet.maxTempF)°f"
+                cell.lowTempLabel.text = "\(cellToSet.minTempF)°f"
+            case "celcius":
+                cell.highTempLabel.text = "\(cellToSet.maxTempC)°c"
+                cell.lowTempLabel.text = "\(cellToSet.minTempC)°c"
+            default:
+                cell.highTempLabel.text = "\(cellToSet.maxTempF)°f"
+                cell.lowTempLabel.text = "\(cellToSet.minTempF)°f"
+            }
+            let date = dateReturner(date: cellToSet.validTime)
             cell.dayOfTheWeekLabel.text = date[1]
             cell.numericDayValuelabel.text = date[0]
 
@@ -158,10 +188,21 @@ extension WeatherMainController: UICollectionViewDelegate, UICollectionViewDataS
         } else {
             guard let cell = mainView.hourlyCollectionView.dequeueReusableCell(withReuseIdentifier: "Hourly", for: indexPath) as? HourlyCollectionViewCell else { return UICollectionViewCell()}
             let cellToSet = weatherHourly[indexPath.row]
-            cell.hourHighLabel.text = "\(cellToSet.maxTempF)°"
-            cell.hourLowLabel.text = "\(cellToSet.minTempF)°"
+            switch temperatureType {
+            case "fahrenheit":
+                cell.hourHighLabel.text = "\(cellToSet.maxTempF)°f"
+                cell.hourLowLabel.text = "\(cellToSet.minTempF)°f"
+                cell.hourTempLabel.text = "\(cellToSet.tempF)°f"
+            case "celcius":
+                cell.hourHighLabel.text = "\(cellToSet.maxTempC)°c"
+                cell.hourLowLabel.text = "\(cellToSet.minTempC)°c"
+                cell.hourTempLabel.text = "\(cellToSet.tempC)°c"
+            default:
+                cell.hourHighLabel.text = "\(cellToSet.maxTempF)°f"
+                cell.hourLowLabel.text = "\(cellToSet.minTempF)°f"
+                cell.hourTempLabel.text = "\(cellToSet.tempF)°f"
+            }
             cell.hourLabel.text = timeConverter(date: cellToSet.dateTimeISO)
-            cell.hourTempLabel.text = "\(cellToSet.tempF)°"
             return cell
         }
     }
