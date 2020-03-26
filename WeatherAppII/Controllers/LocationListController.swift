@@ -13,8 +13,6 @@ class LocationListController: UIViewController {
         locationView.placesSearchBar.delegate = self
         locationView.locationTable.dataSource = self
         locationView.locationTable.delegate = self
-
-
     }
     override func viewDidAppear(_ animated: Bool) {
         locationView.locationTable.reloadData()
