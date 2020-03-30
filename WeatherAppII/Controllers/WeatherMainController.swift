@@ -21,7 +21,7 @@ class WeatherMainController: UIViewController {
     var cityImage: UIImage?{
         didSet{
             DispatchQueue.main.async {
-                self.mainView.cityImage.image = self.cityImage
+                self.backgroundImage.image = self.cityImage!
             }
         }
     }
@@ -36,9 +36,27 @@ class WeatherMainController: UIViewController {
     
     var temperatureType = UserDefaults.standard.string(forKey: DefaultKeys.tempType)
     
+    lazy var backgroundView : UIView = {
+        let backgroundView = UIView()
+        backgroundView.frame.size = self.mainView.contentViewSize
+        return backgroundView
+    }()
+    lazy var backgroundImage : UIImageView = {
+        let backgroundImage = UIImageView()
+        return backgroundImage
+    }()
+    lazy var containerView : UIView = {
+        let containerView = UIView()
+        containerView.backgroundColor = .clear
+        containerView.frame.size = self.mainView.contentViewSize
+        return containerView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(mainView)
+        view.addSubview(backgroundView)
+        setUpImage()
+        backgroundView.addSubview(mainView)
         viewDidLoadSetup()
         
         mainView.forcastCollectionView.dataSource = self
@@ -46,16 +64,29 @@ class WeatherMainController: UIViewController {
         mainView.hourlyCollectionView.dataSource = self
         mainView.hourlyCollectionView.delegate = self
     }
-    
+
     func viewDidLoadSetup(){
         self.title = "City"
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Settings", style: .done, target: self, action: #selector(SegueToLocationVC))
+//        navigationController?.navigationBar.prefersLargeTitles = true
         getWeatherInfo()
         
         mainView.forcastCollectionView.register(ForcastCollectionViewCell.self, forCellWithReuseIdentifier: "Forcast")
         mainView.hourlyCollectionView.register(HourlyCollectionViewCell.self, forCellWithReuseIdentifier: "Hourly")
         
         imageHelper()
+    }
+    
+    func setUpImage(){
+        backgroundView.addSubview(backgroundImage)
+        backgroundImage.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            backgroundImage.topAnchor.constraint(equalTo: backgroundView.topAnchor),
+                backgroundImage.heightAnchor.constraint(equalTo: backgroundView.heightAnchor),
+                backgroundImage.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor),
+                backgroundImage.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor),
+                backgroundImage.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor)
+        ])
     }
     
     func getWeatherInfo() {
@@ -151,8 +182,6 @@ class WeatherMainController: UIViewController {
     }
     
 }
-
-
 
 extension WeatherMainController: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
