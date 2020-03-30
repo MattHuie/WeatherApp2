@@ -3,6 +3,8 @@ import UIKit
 
 class WeatherMainScrollView: UIScrollView {
 
+    lazy var contentViewSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height + 300)
+    
     lazy var cityLabel: UILabel = {
         let label = UILabel()
         label.text = "City"
@@ -134,11 +136,10 @@ class WeatherMainScrollView: UIScrollView {
 
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
-        self.backgroundColor = .black
-        self.contentSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height + 300)
+        
         self.backgroundColor = .clear
-        self.contentSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-        setUpImage()
+        self.contentSize = contentViewSize
+
         setupCityState()
         setupTemperature()
         setupWeather()
@@ -156,22 +157,6 @@ class WeatherMainScrollView: UIScrollView {
         required init?(coder: NSCoder) {
             fatalError("init(coder:) has not been implemented")
         }
-    
-    
-    func setUpImage(){
-        addSubview(cityImage)
-        cityImage.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-                cityImage.topAnchor.constraint(equalTo: topAnchor),
-                cityImage.heightAnchor.constraint(equalTo: heightAnchor),
-                cityImage.bottomAnchor.constraint(equalTo: bottomAnchor),
-                cityImage.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0),
-                cityImage.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0),
-                cityImage.trailingAnchor.constraint(equalTo: trailingAnchor),
-                cityImage.leadingAnchor.constraint(equalTo: leadingAnchor)
-
-        ])
-    }
 
     func setupCityState() {
         addSubview(stateLabel)

@@ -18,11 +18,10 @@ class WeatherMainController: UIViewController {
             }
         }
     }
-    
     var cityImage: UIImage?{
         didSet{
             DispatchQueue.main.async {
-                self.mainView.cityImage.image = self.cityImage
+                self.backgroundImage.image = self.cityImage!
             }
         }
     }
@@ -35,11 +34,29 @@ class WeatherMainController: UIViewController {
     }
     var navagationItem = UINavigationItem.init(title: "")
     
+    var temperatureType = UserDefaults.standard.string(forKey: DefaultKeys.tempType)
     
+    lazy var backgroundView : UIView = {
+        let backgroundView = UIView()
+        backgroundView.frame.size = self.mainView.contentViewSize
+        return backgroundView
+    }()
+    lazy var backgroundImage : UIImageView = {
+        let backgroundImage = UIImageView()
+        return backgroundImage
+    }()
+    lazy var containerView : UIView = {
+        let containerView = UIView()
+        containerView.backgroundColor = .clear
+        containerView.frame.size = self.mainView.contentViewSize
+        return containerView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(mainView)
+        view.addSubview(backgroundView)
+        setUpImage()
+        backgroundView.addSubview(mainView)
         viewDidLoadSetup()
         
         mainView.forcastCollectionView.dataSource = self
@@ -47,16 +64,29 @@ class WeatherMainController: UIViewController {
         mainView.hourlyCollectionView.dataSource = self
         mainView.hourlyCollectionView.delegate = self
     }
-    
+
     func viewDidLoadSetup(){
         self.title = "City"
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Settings", style: .done, target: self, action: #selector(SegueToLocationVC))
+//        navigationController?.navigationBar.prefersLargeTitles = true
         getWeatherInfo()
         
         mainView.forcastCollectionView.register(ForcastCollectionViewCell.self, forCellWithReuseIdentifier: "Forcast")
         mainView.hourlyCollectionView.register(HourlyCollectionViewCell.self, forCellWithReuseIdentifier: "Hourly")
         
         imageHelper()
+    }
+    
+    func setUpImage(){
+        backgroundView.addSubview(backgroundImage)
+        backgroundImage.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            backgroundImage.topAnchor.constraint(equalTo: backgroundView.topAnchor),
+                backgroundImage.heightAnchor.constraint(equalTo: backgroundView.heightAnchor),
+                backgroundImage.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor),
+                backgroundImage.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor),
+                backgroundImage.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor)
+        ])
     }
     
     func getWeatherInfo() {
@@ -89,7 +119,6 @@ class WeatherMainController: UIViewController {
                       }
         }
         
-
     }
     
     func imageHelper(){
@@ -116,15 +145,36 @@ class WeatherMainController: UIViewController {
     
     func currentWeatherSetUp(){
         if let currentWeather = weatherCurrent{
-            mainView.feelsLikeLabel.text = "\(currentWeather.feelslikeF) °"
+            var windSpeed = "Wind Speed: \(currentWeather.windMPH) MPH"
+            var visibility = "\(currentWeather.visibilityMI) Miles"
+            var feelsLike = "\(currentWeather.feelslikeF)°f"
+            var currentTemp = "\(currentWeather.tempF)°f"
             mainView.humidityLabel.text = "\(currentWeather.humidity)"
-            
             mainView.sunriseLabel.text = sunTimeConverter(date: currentWeather.sunriseISO)
             mainView.sunsetLabel.text = (sunTimeConverter(date: currentWeather.sunsetISO))
-            mainView.visibilityLabel.text = "\(currentWeather.visibilityMI) Miles"
-            mainView.windSpeedLabel.text = "Wind Speed: \(currentWeather.windMPH) MPH"
             mainView.windDirectionLabel.text = "Wind Direction: \(currentWeather.windDir)"
-            mainView.temperatureLabel.text = "\(currentWeather.tempF) °"
+            switch temperatureType{
+                case "fahrenheit":
+                    windSpeed = "Wind Speed: \(currentWeather.windMPH) MPH"
+                    visibility = "\(currentWeather.visibilityMI) Miles"
+                    feelsLike = "\(currentWeather.feelslikeF)°f"
+                    currentTemp = "\(currentWeather.tempF)°f"
+                case "celcius":
+                    windSpeed = "Wind Speed: \(currentWeather.windKPH) KPH"
+                    visibility = "\(currentWeather.visibilityKM) KM"
+                    feelsLike = "\(currentWeather.feelslikeC)°c"
+                    currentTemp = "\(currentWeather.tempC)°c"
+                default:
+                    windSpeed = "Wind Speed: \(currentWeather.windMPH) MPH"
+                    visibility = "\(currentWeather.visibilityMI) Miles"
+                    feelsLike = "\(currentWeather.feelslikeF)°f"
+                    currentTemp = "\(currentWeather.tempF)°f"
+            }
+            mainView.windSpeedLabel.text = windSpeed
+            mainView.visibilityLabel.text = visibility
+            mainView.feelsLikeLabel.text = feelsLike
+            mainView.temperatureLabel.text = currentTemp
+            
             mainView.weatherLabel.text = "\(currentWeather.weather.capitalized)"
             mainView.stateLabel.text = "State"
         }
@@ -132,8 +182,6 @@ class WeatherMainController: UIViewController {
     }
     
 }
-
-
 
 extension WeatherMainController: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -148,10 +196,19 @@ extension WeatherMainController: UICollectionViewDelegate, UICollectionViewDataS
         
         if collectionView == mainView.forcastCollectionView {
         guard let cell =  mainView.forcastCollectionView.dequeueReusableCell(withReuseIdentifier: "Forcast", for: indexPath) as? ForcastCollectionViewCell else { return UICollectionViewCell()}
-            
-            cell.highTempLabel.text = "\(weatherForcast[indexPath.row].maxTempF)°"
-            cell.lowTempLabel.text = "\(weatherForcast[indexPath.row].minTempF)°"
-            let date = dateReturner(date: weatherForcast[indexPath.row].validTime)
+            let cellToSet = weatherForcast[indexPath.row]
+            switch temperatureType {
+            case "fahrenheit":
+                cell.highTempLabel.text = "\(cellToSet.maxTempF)°f"
+                cell.lowTempLabel.text = "\(cellToSet.minTempF)°f"
+            case "celcius":
+                cell.highTempLabel.text = "\(cellToSet.maxTempC)°c"
+                cell.lowTempLabel.text = "\(cellToSet.minTempC)°c"
+            default:
+                cell.highTempLabel.text = "\(cellToSet.maxTempF)°f"
+                cell.lowTempLabel.text = "\(cellToSet.minTempF)°f"
+            }
+            let date = dateReturner(date: cellToSet.validTime)
             cell.dayOfTheWeekLabel.text = date[1]
             cell.numericDayValuelabel.text = date[0]
 
@@ -160,80 +217,22 @@ extension WeatherMainController: UICollectionViewDelegate, UICollectionViewDataS
         } else {
             guard let cell = mainView.hourlyCollectionView.dequeueReusableCell(withReuseIdentifier: "Hourly", for: indexPath) as? HourlyCollectionViewCell else { return UICollectionViewCell()}
             let cellToSet = weatherHourly[indexPath.row]
-            cell.hourHighLabel.text = "\(cellToSet.maxTempF)°"
-            cell.hourLowLabel.text = "\(cellToSet.minTempF)°"
+            switch temperatureType {
+            case "fahrenheit":
+                cell.hourHighLabel.text = "\(cellToSet.maxTempF)°f"
+                cell.hourLowLabel.text = "\(cellToSet.minTempF)°f"
+                cell.hourTempLabel.text = "\(cellToSet.tempF)°f"
+            case "celcius":
+                cell.hourHighLabel.text = "\(cellToSet.maxTempC)°c"
+                cell.hourLowLabel.text = "\(cellToSet.minTempC)°c"
+                cell.hourTempLabel.text = "\(cellToSet.tempC)°c"
+            default:
+                cell.hourHighLabel.text = "\(cellToSet.maxTempF)°f"
+                cell.hourLowLabel.text = "\(cellToSet.minTempF)°f"
+                cell.hourTempLabel.text = "\(cellToSet.tempF)°f"
+            }
             cell.hourLabel.text = timeConverter(date: cellToSet.dateTimeISO)
-            cell.hourTempLabel.text = "\(cellToSet.tempF)°"
             return cell
         }
-    }
-    
-    
-    
-}
-
-extension WeatherMainController{
-    func timeConverter(date: String)-> String {
-        
-        var returnTime = ""
-        
-        let splitDateAndTime = date.components(separatedBy: "T")
-        
-        let splitTime = splitDateAndTime[1]
-        
-
-        let givenTimeFormat = DateFormatter()
-        givenTimeFormat.dateFormat = "HH:mm:ssZ"
-        let hourFormatter = DateFormatter()
-        hourFormatter.dateFormat = "h:mm a"
-        
-
-        if let currentTime = givenTimeFormat.date(from: splitTime){
-            returnTime = hourFormatter.string(from: currentTime)
-        }
-        return returnTime
-    }
-    
-    func dateReturner(date:String)-> [String]{
-        var returnDate = ""
-        
-        let splitDateAndTime = date.components(separatedBy: "T")
-
-        let splitDate = splitDateAndTime[0]
-        
-        let givenDateFormate = DateFormatter()
-        givenDateFormate.dateFormat = "yyyy-MM-dd"
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEEE, MM/dd"
-        if let currentDate = givenDateFormate.date(from: splitDate){
-            returnDate = dateFormatter.string(from: currentDate)
-        }
-            let returnDay = returnDate.split(separator: ",")
-            let returnDayOfTheWeek = returnDay[0]
-            let returnDayAndMonth = returnDay[1]
-            
-        return [String(returnDayAndMonth), String(returnDayOfTheWeek)]
-
-    }
-    
-    func sunTimeConverter(date: String)-> String {
-        
-        var returnTime = ""
-        
-        let splitDateAndTime = date.components(separatedBy: "T")
-        
-        let splitTime = splitDateAndTime[1]
-        
-
-        let givenTimeFormat = DateFormatter()
-        givenTimeFormat.dateFormat = "HH:mm:ssZ"
-        let hourFormatter = DateFormatter()
-        hourFormatter.dateFormat = "h:mm a"
-        
-
-        if let currentTime = givenTimeFormat.date(from: splitTime){
-            returnTime = hourFormatter.string(from: currentTime)
-        }
-        return returnTime
     }
 }

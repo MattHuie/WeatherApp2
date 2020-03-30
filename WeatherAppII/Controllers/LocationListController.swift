@@ -13,8 +13,6 @@ class LocationListController: UIViewController {
         locationView.placesSearchBar.delegate = self
         locationView.locationTable.dataSource = self
         locationView.locationTable.delegate = self
-
-
     }
     override func viewDidAppear(_ animated: Bool) {
         locationView.locationTable.reloadData()
@@ -63,6 +61,7 @@ extension LocationListController: UITableViewDataSource, UITableViewDelegate {
 extension LocationListController: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         locationView.placesSearchBar.setShowsCancelButton(true, animated: true)
+        
     }
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         self.dismissKeyboard()
